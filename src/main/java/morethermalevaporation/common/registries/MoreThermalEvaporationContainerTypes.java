@@ -4,27 +4,33 @@ import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.registration.impl.ContainerTypeDeferredRegister;
 import mekanism.common.registration.impl.ContainerTypeRegistryObject;
 import morethermalevaporation.MoreThermalEvaporation;
-import morethermalevaporation.tile.multiblock.TileEntityAdvancedThermalEvaporationController;
-import morethermalevaporation.tile.multiblock.TileEntityBasicThermalEvaporationController;
-import morethermalevaporation.tile.multiblock.TileEntityEliteThermalEvaporationController;
-import morethermalevaporation.tile.multiblock.TileEntityUltimateThermalEvaporationController;
+import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
+import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationController;
 
 public class MoreThermalEvaporationContainerTypes {
     public static final ContainerTypeDeferredRegister CONTAINER_TYPES = new ContainerTypeDeferredRegister(MoreThermalEvaporation.MODID);
 
     // Basic
-    public static final ContainerTypeRegistryObject<MekanismTileContainer<TileEntityBasicThermalEvaporationController>> BASIC_THERMAL_EVAPORATION_CONTROLLER = CONTAINER_TYPES.register(MoreThermalEvaporationBlocks.BASIC_THERMAL_EVAPORATION_CONTROLLER, TileEntityBasicThermalEvaporationController.class);
+    public static final ContainerTypeRegistryObject<MekanismTileContainer<TileEntityMoreThermalEvaporationController>> BASIC_THERMAL_EVAPORATION_CONTROLLER = CONTAINER_TYPES.register(MoreThermalEvaporationBlocks.getController(MoreThermalEvaporationTier.BASIC), TileEntityMoreThermalEvaporationController.class);
 
     // Advanced
-    public static final ContainerTypeRegistryObject<MekanismTileContainer<TileEntityAdvancedThermalEvaporationController>> ADVANCED_THERMAL_EVAPORATION_CONTROLLER = CONTAINER_TYPES.register(MoreThermalEvaporationBlocks.ADVANCED_THERMAL_EVAPORATION_CONTROLLER, TileEntityAdvancedThermalEvaporationController.class);
+    public static final ContainerTypeRegistryObject<MekanismTileContainer<TileEntityMoreThermalEvaporationController>> ADVANCED_THERMAL_EVAPORATION_CONTROLLER = CONTAINER_TYPES.register(MoreThermalEvaporationBlocks.getController(MoreThermalEvaporationTier.ADVANCED), TileEntityMoreThermalEvaporationController.class);
 
     // Elite
-    public static final ContainerTypeRegistryObject<MekanismTileContainer<TileEntityEliteThermalEvaporationController>> ELITE_THERMAL_EVAPORATION_CONTROLLER = CONTAINER_TYPES.register(MoreThermalEvaporationBlocks.ELITE_THERMAL_EVAPORATION_CONTROLLER, TileEntityEliteThermalEvaporationController.class);
+    public static final ContainerTypeRegistryObject<MekanismTileContainer<TileEntityMoreThermalEvaporationController>> ELITE_THERMAL_EVAPORATION_CONTROLLER = CONTAINER_TYPES.register(MoreThermalEvaporationBlocks.getController(MoreThermalEvaporationTier.ELITE), TileEntityMoreThermalEvaporationController.class);
 
     // Ultimate
-    public static final ContainerTypeRegistryObject<MekanismTileContainer<TileEntityUltimateThermalEvaporationController>> ULTIMATE_THERMAL_EVAPORATION_CONTROLLER = CONTAINER_TYPES.register(MoreThermalEvaporationBlocks.ULTIMATE_THERMAL_EVAPORATION_CONTROLLER, TileEntityUltimateThermalEvaporationController.class);
+    public static final ContainerTypeRegistryObject<MekanismTileContainer<TileEntityMoreThermalEvaporationController>> ULTIMATE_THERMAL_EVAPORATION_CONTROLLER = CONTAINER_TYPES.register(MoreThermalEvaporationBlocks.getController(MoreThermalEvaporationTier.ULTIMATE), TileEntityMoreThermalEvaporationController.class);
 
     private MoreThermalEvaporationContainerTypes() {
+    }
 
+    public static ContainerTypeRegistryObject<MekanismTileContainer<TileEntityMoreThermalEvaporationController>> getContainerTypes(MoreThermalEvaporationTier tier) {
+        return switch (tier) {
+            case BASIC -> BASIC_THERMAL_EVAPORATION_CONTROLLER;
+            case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_CONTROLLER;
+            case ELITE -> ELITE_THERMAL_EVAPORATION_CONTROLLER;
+            case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_CONTROLLER;
+        };
     }
 }

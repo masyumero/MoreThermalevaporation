@@ -1,48 +1,119 @@
 package morethermalevaporation.common.registries;
 
 import mekanism.api.tier.BaseTier;
-import mekanism.common.block.interfaces.IHasDescription;
 import mekanism.common.block.prefab.BlockBasicMultiblock;
+import mekanism.common.content.blocktype.BlockTypeTile;
 import mekanism.common.registration.impl.BlockDeferredRegister;
 import mekanism.common.registration.impl.BlockRegistryObject;
+import mekanism.common.tile.base.TileEntityMekanism;
 import morethermalevaporation.MoreThermalEvaporation;
-import morethermalevaporation.tile.multiblock.*;
-import net.minecraft.world.level.block.Block;
+import morethermalevaporation.common.item.block.ItemBlockMoreThermalEvaporation;
+import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
+import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationBlock;
+import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationController;
+import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationValve;
 import net.minecraft.world.level.material.MapColor;
-
-import java.util.function.Supplier;
 
 public class MoreThermalEvaporationBlocks {
 
     public static final BlockDeferredRegister BLOCKS = new BlockDeferredRegister(MoreThermalEvaporation.MODID);
+
     // Basic
-    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityBasicThermalEvaporationBlock>, ItemBlockMekanismTier<BlockBasicMultiblock<TileEntityBasicThermalEvaporationBlock>>> BASIC_THERMAL_EVAPORATION_BLOCK = registerBlock("basic_thermal_evaporation_block", () -> new BlockBasicMultiblock<>(MoreThermalEvaporationBlockTypes.BASIC_THERMAL_EVAPORATION_BLOCK, properties -> properties.mapColor(MapColor.EMERALD)), BaseTier.BASIC);
-    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityBasicThermalEvaporationValve>, ItemBlockMekanismTier<BlockBasicMultiblock<TileEntityBasicThermalEvaporationValve>>> BASIC_THERMAL_EVAPORATION_VALVE = registerBlock("basic_thermal_evaporation_valve", () -> new BlockBasicMultiblock<>(MoreThermalEvaporationBlockTypes.BASIC_THERMAL_EVAPORATION_VALVE, properties -> properties.mapColor(MapColor.EMERALD)), BaseTier.BASIC);
-    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityBasicThermalEvaporationController>, ItemBlockMekanismTier<BlockBasicMultiblock<TileEntityBasicThermalEvaporationController>>> BASIC_THERMAL_EVAPORATION_CONTROLLER = registerBlock("basic_thermal_evaporation_controller", () -> new BlockBasicMultiblock<>(MoreThermalEvaporationBlockTypes.BASIC_THERMAL_EVAPORATION_CONTROLLER, properties -> properties.mapColor(MapColor.EMERALD)), BaseTier.BASIC);
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationBlock>, ItemBlockMoreThermalEvaporation>
+            BASIC_THERMAL_EVAPORATION_BLOCK = registerMoreThermalEvaporationPart(
+            BaseTier.BASIC, "block", MoreThermalEvaporationBlockTypes.BASIC_THERMAL_EVAPORATION_BLOCK);
+
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationValve>, ItemBlockMoreThermalEvaporation>
+            BASIC_THERMAL_EVAPORATION_VALVE = registerMoreThermalEvaporationPart(
+            BaseTier.BASIC, "valve", MoreThermalEvaporationBlockTypes.BASIC_THERMAL_EVAPORATION_VALVE);
+
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationController>, ItemBlockMoreThermalEvaporation>
+            BASIC_THERMAL_EVAPORATION_CONTROLLER = registerMoreThermalEvaporationPart(
+            BaseTier.BASIC, "controller", MoreThermalEvaporationBlockTypes.BASIC_THERMAL_EVAPORATION_CONTROLLER);
 
     // Advanced
-    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityAdvancedThermalEvaporationBlock>, ItemBlockMekanismTier<BlockBasicMultiblock<TileEntityAdvancedThermalEvaporationBlock>>> ADVANCED_THERMAL_EVAPORATION_BLOCK = registerBlock("advanced_thermal_evaporation_block", () -> new BlockBasicMultiblock<>(MoreThermalEvaporationBlockTypes.ADVANCED_THERMAL_EVAPORATION_BLOCK, properties -> properties.mapColor(MapColor.COLOR_RED)), BaseTier.ADVANCED);
-    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityAdvancedThermalEvaporationValve>, ItemBlockMekanismTier<BlockBasicMultiblock<TileEntityAdvancedThermalEvaporationValve>>> ADVANCED_THERMAL_EVAPORATION_VALVE = registerBlock("advanced_thermal_evaporation_valve", () -> new BlockBasicMultiblock<>(MoreThermalEvaporationBlockTypes.ADVANCED_THERMAL_EVAPORATION_VALVE, properties -> properties.mapColor(MapColor.COLOR_RED)), BaseTier.ADVANCED);
-    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityAdvancedThermalEvaporationController>, ItemBlockMekanismTier<BlockBasicMultiblock<TileEntityAdvancedThermalEvaporationController>>> ADVANCED_THERMAL_EVAPORATION_CONTROLLER = registerBlock("advanced_thermal_evaporation_controller", () -> new BlockBasicMultiblock<>(MoreThermalEvaporationBlockTypes.ADVANCED_THERMAL_EVAPORATION_CONTROLLER, properties -> properties.mapColor(MapColor.COLOR_RED)), BaseTier.ADVANCED);
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationBlock>, ItemBlockMoreThermalEvaporation>
+            ADVANCED_THERMAL_EVAPORATION_BLOCK = registerMoreThermalEvaporationPart(
+            BaseTier.ADVANCED, "block", MoreThermalEvaporationBlockTypes.ADVANCED_THERMAL_EVAPORATION_BLOCK);
+
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationValve>, ItemBlockMoreThermalEvaporation>
+            ADVANCED_THERMAL_EVAPORATION_VALVE = registerMoreThermalEvaporationPart(
+            BaseTier.ADVANCED, "valve", MoreThermalEvaporationBlockTypes.ADVANCED_THERMAL_EVAPORATION_VALVE);
+
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationController>, ItemBlockMoreThermalEvaporation>
+            ADVANCED_THERMAL_EVAPORATION_CONTROLLER = registerMoreThermalEvaporationPart(
+            BaseTier.ADVANCED, "controller", MoreThermalEvaporationBlockTypes.ADVANCED_THERMAL_EVAPORATION_CONTROLLER);
 
     // Elite
-    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityEliteThermalEvaporationBlock>, ItemBlockMekanismTier<BlockBasicMultiblock<TileEntityEliteThermalEvaporationBlock>>> ELITE_THERMAL_EVAPORATION_BLOCK = registerBlock("elite_thermal_evaporation_block", () -> new BlockBasicMultiblock<>(MoreThermalEvaporationBlockTypes.ELITE_THERMAL_EVAPORATION_BLOCK, properties -> properties.mapColor(MapColor.WARPED_NYLIUM)), BaseTier.ELITE);
-    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityEliteThermalEvaporationValve>, ItemBlockMekanismTier<BlockBasicMultiblock<TileEntityEliteThermalEvaporationValve>>> ELITE_THERMAL_EVAPORATION_VALVE = registerBlock("elite_thermal_evaporation_valve", () -> new BlockBasicMultiblock<>(MoreThermalEvaporationBlockTypes.ELITE_THERMAL_EVAPORATION_VALVE, properties -> properties.mapColor(MapColor.WARPED_NYLIUM)), BaseTier.ELITE);
-    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityEliteThermalEvaporationController>, ItemBlockMekanismTier<BlockBasicMultiblock<TileEntityEliteThermalEvaporationController>>> ELITE_THERMAL_EVAPORATION_CONTROLLER = registerBlock("elite_thermal_evaporation_controller", () -> new BlockBasicMultiblock<>(MoreThermalEvaporationBlockTypes.ELITE_THERMAL_EVAPORATION_CONTROLLER, properties -> properties.mapColor(MapColor.WARPED_NYLIUM)), BaseTier.ELITE);
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationBlock>, ItemBlockMoreThermalEvaporation>
+            ELITE_THERMAL_EVAPORATION_BLOCK = registerMoreThermalEvaporationPart(
+            BaseTier.ELITE, "block", MoreThermalEvaporationBlockTypes.ELITE_THERMAL_EVAPORATION_BLOCK);
+
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationValve>, ItemBlockMoreThermalEvaporation>
+            ELITE_THERMAL_EVAPORATION_VALVE = registerMoreThermalEvaporationPart(
+            BaseTier.ELITE, "valve", MoreThermalEvaporationBlockTypes.ELITE_THERMAL_EVAPORATION_VALVE);
+
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationController>, ItemBlockMoreThermalEvaporation>
+            ELITE_THERMAL_EVAPORATION_CONTROLLER = registerMoreThermalEvaporationPart(
+            BaseTier.ELITE, "controller", MoreThermalEvaporationBlockTypes.ELITE_THERMAL_EVAPORATION_CONTROLLER);
 
     // Ultimate
-    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityUltimateThermalEvaporationBlock>, ItemBlockMekanismTier<BlockBasicMultiblock<TileEntityUltimateThermalEvaporationBlock>>> ULTIMATE_THERMAL_EVAPORATION_BLOCK = registerBlock("ultimate_thermal_evaporation_block", () -> new BlockBasicMultiblock<>(MoreThermalEvaporationBlockTypes.ULTIMATE_THERMAL_EVAPORATION_BLOCK, properties -> properties.mapColor(MapColor.COLOR_PURPLE)), BaseTier.ULTIMATE);
-    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityUltimateThermalEvaporationValve>, ItemBlockMekanismTier<BlockBasicMultiblock<TileEntityUltimateThermalEvaporationValve>>> ULTIMATE_THERMAL_EVAPORATION_VALVE = registerBlock("ultimate_thermal_evaporation_valve", () -> new BlockBasicMultiblock<>(MoreThermalEvaporationBlockTypes.ULTIMATE_THERMAL_EVAPORATION_VALVE, properties -> properties.mapColor(MapColor.COLOR_PURPLE)), BaseTier.ULTIMATE);
-    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityUltimateThermalEvaporationController>, ItemBlockMekanismTier<BlockBasicMultiblock<TileEntityUltimateThermalEvaporationController>>> ULTIMATE_THERMAL_EVAPORATION_CONTROLLER = registerBlock("ultimate_thermal_evaporation_controller", () -> new BlockBasicMultiblock<>(MoreThermalEvaporationBlockTypes.ULTIMATE_THERMAL_EVAPORATION_CONTROLLER, properties -> properties.mapColor(MapColor.COLOR_PURPLE)), BaseTier.ULTIMATE);
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationBlock>, ItemBlockMoreThermalEvaporation>
+            ULTIMATE_THERMAL_EVAPORATION_BLOCK = registerMoreThermalEvaporationPart(
+            BaseTier.ULTIMATE, "block", MoreThermalEvaporationBlockTypes.ULTIMATE_THERMAL_EVAPORATION_BLOCK);
+
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationValve>, ItemBlockMoreThermalEvaporation>
+            ULTIMATE_THERMAL_EVAPORATION_VALVE = registerMoreThermalEvaporationPart(
+            BaseTier.ULTIMATE, "valve", MoreThermalEvaporationBlockTypes.ULTIMATE_THERMAL_EVAPORATION_VALVE);
+
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationController>, ItemBlockMoreThermalEvaporation>
+            ULTIMATE_THERMAL_EVAPORATION_CONTROLLER = registerMoreThermalEvaporationPart(
+            BaseTier.ULTIMATE, "controller", MoreThermalEvaporationBlockTypes.ULTIMATE_THERMAL_EVAPORATION_CONTROLLER);
 
     private MoreThermalEvaporationBlocks() {
     }
 
-    private static <BLOCK extends Block & IHasDescription> BlockRegistryObject<BLOCK, ItemBlockMekanismTier<BLOCK>> registerBlock(
-            String name,
-            Supplier<? extends BLOCK> blockSupplier,
-            BaseTier tier) {
+    private static <TILE extends TileEntityMekanism> BlockRegistryObject<
+            BlockBasicMultiblock<TILE>,
+            ItemBlockMoreThermalEvaporation> registerMoreThermalEvaporationPart(
+            BaseTier tier,
+            String suffix,
+            BlockTypeTile<TILE> type) {
 
-        return BLOCKS.registerDefaultProperties(name, blockSupplier, (block, props) -> new ItemBlockMekanismTier<>(block, props, tier));
+        String name = tier.getLowerName() + "_thermal_evaporation_" + suffix;
+        MapColor color = tier.getMapColor();
+
+        return BLOCKS.register(
+                name,
+                () -> new BlockBasicMultiblock<>(type, properties -> properties.mapColor(color)),
+                ItemBlockMoreThermalEvaporation::new
+        );
+    }
+
+    public static BlockRegistryObject<? extends BlockBasicMultiblock<?>, ItemBlockMoreThermalEvaporation> getBlock(MoreThermalEvaporationTier tier) {
+        return switch (tier) {
+            case BASIC -> BASIC_THERMAL_EVAPORATION_BLOCK;
+            case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_BLOCK;
+            case ELITE -> ELITE_THERMAL_EVAPORATION_BLOCK;
+            case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_BLOCK;
+        };
+    }
+
+    public static BlockRegistryObject<? extends BlockBasicMultiblock<?>, ItemBlockMoreThermalEvaporation> getValve(MoreThermalEvaporationTier tier) {
+        return switch (tier) {
+            case BASIC -> BASIC_THERMAL_EVAPORATION_VALVE;
+            case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_VALVE;
+            case ELITE -> ELITE_THERMAL_EVAPORATION_VALVE;
+            case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_VALVE;
+        };
+    }
+
+    public static BlockRegistryObject<? extends BlockBasicMultiblock<?>, ItemBlockMoreThermalEvaporation> getController(MoreThermalEvaporationTier tier) {
+        return switch (tier) {
+            case BASIC -> BASIC_THERMAL_EVAPORATION_CONTROLLER;
+            case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_CONTROLLER;
+            case ELITE -> ELITE_THERMAL_EVAPORATION_CONTROLLER;
+            case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_CONTROLLER;
+        };
     }
 }

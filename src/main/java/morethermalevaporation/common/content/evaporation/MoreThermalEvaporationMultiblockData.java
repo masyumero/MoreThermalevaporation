@@ -1,4 +1,4 @@
-package morethermalevaporation.common.evaporation;
+package morethermalevaporation.common.content.evaporation;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -39,8 +39,8 @@ import mekanism.common.util.CapabilityUtils;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.NBTUtils;
 import mekanism.common.util.WorldUtils;
-import morethermalevaporation.common.config.MoreThermalEvaporationConfig;
-import morethermalevaporation.tile.multiblock.TileEntityBasicThermalEvaporationBlock;
+import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
+import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -57,10 +57,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 
-public class BasicThermalEvaporationMultiblockData extends MultiblockData implements IValveHandler, FluidRecipeLookupHandler<FluidToFluidRecipe> {
+public class MoreThermalEvaporationMultiblockData extends MultiblockData implements IValveHandler, FluidRecipeLookupHandler<FluidToFluidRecipe> {
 
     public static final int MAX_HEIGHT = 18;
-    public static final double MAX_MULTIPLIER_TEMP = 6_000;
+    //    public static final double MAX_MULTIPLIER_TEMP = 12_000;
     private static final List<RecipeError> TRACKED_ERROR_TYPES = List.of(
             RecipeError.NOT_ENOUGH_INPUT,
             RecipeError.NOT_ENOUGH_OUTPUT_SPACE,
@@ -74,6 +74,7 @@ public class BasicThermalEvaporationMultiblockData extends MultiblockData implem
     final FluidInventorySlot inputOutputSlot;
     @WrappingComputerMethod(wrapper = ComputerIInventorySlotWrapper.class, methodNames = "getOutputItemOutput", docPlaceholder = "output side's output slot")
     final OutputInventorySlot outputOutputSlot;
+    private final MoreThermalEvaporationTier tier;
     private final RecipeCacheLookupMonitor<FluidToFluidRecipe> recipeCacheLookupMonitor;
     private final BooleanSupplier recheckAllRecipeErrors;
     @ContainerSync
@@ -98,16 +99,19 @@ public class BasicThermalEvaporationMultiblockData extends MultiblockData implem
     @SyntheticComputerMethod(getter = "getEnvironmentalLoss")
     public double lastEnvironmentLoss;
     private double biomeAmbientTemp;
+    private double maxMultiplierTemp;
     private double tempMultiplier;
     private int inputTankCapacity;
 
-    public BasicThermalEvaporationMultiblockData(TileEntityBasicThermalEvaporationBlock tile) {
+    public MoreThermalEvaporationMultiblockData(TileEntityMoreThermalEvaporationBlock tile, MoreThermalEvaporationTier tier) {
         super(tile);
+        this.tier = tier;
         recipeCacheLookupMonitor = new RecipeCacheLookupMonitor<>(this);
         recheckAllRecipeErrors = TileEntityRecipeMachine.shouldRecheckAllErrors(tile);
+        maxMultiplierTemp = tier.getMultiplierTemp();
         biomeAmbientTemp = HeatAPI.getAmbientTemp(tile.getLevel(), tile.getTilePos());
         fluidTanks.add(inputTank = VariableCapacityFluidTank.input(this, this::getMaxFluid, this::containsRecipe, createSaveAndComparator(recipeCacheLookupMonitor)));
-        fluidTanks.add(outputTank = VariableCapacityFluidTank.output(this, MoreThermalEvaporationConfig.BasicEvaporationOutputTankCapacity::get, BasicFluidTank.alwaysTrue, this));
+        fluidTanks.add(outputTank = VariableCapacityFluidTank.output(this, tier::getOutputTankCapacity, BasicFluidTank.alwaysTrue, this));
         inputHandler = InputHelper.getInputHandler(inputTank, RecipeError.NOT_ENOUGH_INPUT);
         outputHandler = OutputHelper.getOutputHandler(outputTank, RecipeError.NOT_ENOUGH_OUTPUT_SPACE);
         inventorySlots.add(inputInputSlot = FluidInventorySlot.fill(inputTank, this, 28, 20));
@@ -135,7 +139,7 @@ public class BasicThermalEvaporationMultiblockData extends MultiblockData implem
         lastEnvironmentLoss = simulateEnvironment();
         // update temperature
         updateHeatCapacitors(null);
-        tempMultiplier = (Math.min(MAX_MULTIPLIER_TEMP, getTemperature()) - HeatAPI.AMBIENT_TEMP) * MekanismConfig.general.evaporationTempMultiplier.get() *
+        tempMultiplier = (Math.min(maxMultiplierTemp, getTemperature()) - HeatAPI.AMBIENT_TEMP) * MekanismConfig.general.evaporationTempMultiplier.get() *
                 ((double) height() / MAX_HEIGHT);
         inputOutputSlot.drainTank(outputOutputSlot);
         inputInputSlot.fillTank(outputInputSlot);
@@ -313,17 +317,17 @@ public class BasicThermalEvaporationMultiblockData extends MultiblockData implem
     }
 
     private static class RefreshListener implements NonNullConsumer<LazyOptional<IEvaporationSolar>> {
-        private final WeakReference<BasicThermalEvaporationMultiblockData> multiblock;
+        private final WeakReference<MoreThermalEvaporationMultiblockData> multiblock;
         private final int corner;
 
-        private RefreshListener(BasicThermalEvaporationMultiblockData multiblock, int corner) {
+        private RefreshListener(MoreThermalEvaporationMultiblockData multiblock, int corner) {
             this.multiblock = new WeakReference<>(multiblock);
             this.corner = corner;
         }
 
         @Override
         public void accept(@NotNull LazyOptional<IEvaporationSolar> ignored) {
-            BasicThermalEvaporationMultiblockData multiblockData = multiblock.get();
+            MoreThermalEvaporationMultiblockData multiblockData = multiblock.get();
             if (multiblockData != null && multiblockData.isFormed()) {
                 BlockPos maxPos = multiblockData.getMaxPos();
                 BlockPos pos = switch (corner) {

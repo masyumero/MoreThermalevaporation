@@ -1,0 +1,64 @@
+package morethermalevaporation.tile.multiblock;
+
+import mekanism.api.providers.IBlockProvider;
+import mekanism.common.block.attribute.Attribute;
+import mekanism.common.lib.multiblock.MultiblockManager;
+import mekanism.common.tile.prefab.TileEntityMultiblock;
+import mekanism.common.util.WorldUtils;
+import morethermalevaporation.common.content.evaporation.MoreThermalEvaporationMultiblockData;
+import morethermalevaporation.common.registries.MoreThermalEvaporationBlocks;
+import morethermalevaporation.common.registries.MoreThermalEvaporationManager;
+import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+
+public class TileEntityMoreThermalEvaporationBlock extends TileEntityMultiblock<MoreThermalEvaporationMultiblockData> {
+
+    public MoreThermalEvaporationTier tier;
+
+    public TileEntityMoreThermalEvaporationBlock(MoreThermalEvaporationTier tier, BlockPos pos, BlockState state) {
+        this(MoreThermalEvaporationBlocks.getBlock(tier), pos, state);
+    }
+
+    public TileEntityMoreThermalEvaporationBlock(IBlockProvider provider, BlockPos pos, BlockState state) {
+        super(provider, pos, state);
+    }
+
+    @Override
+    public void onNeighborChange(Block block, BlockPos neighborPos) {
+        super.onNeighborChange(block, neighborPos);
+        if (!isRemote() && WorldUtils.sideDifference(worldPosition, neighborPos) == Direction.DOWN) {
+            MoreThermalEvaporationMultiblockData multiblock = getMultiblock();
+            if (multiblock.isFormed()) {
+                multiblock.updateSolarSpot(getLevel(), neighborPos);
+            }
+        }
+    }
+
+    @Override
+    public MoreThermalEvaporationMultiblockData createMultiblock() {
+        return new MoreThermalEvaporationMultiblockData(this, tier);
+    }
+
+    @Override
+    public MultiblockManager<MoreThermalEvaporationMultiblockData> getManager() {
+        return MoreThermalEvaporationManager.getManager(tier);
+    }
+
+    @Override
+    public boolean canBeMaster() {
+        return false;
+    }
+
+    @Override
+    protected void presetVariables() {
+        super.presetVariables();
+        tier = Attribute.getTier(getBlockType(), MoreThermalEvaporationTier.class);
+    }
+
+    public MoreThermalEvaporationTier getTier() {
+        return tier;
+    }
+}

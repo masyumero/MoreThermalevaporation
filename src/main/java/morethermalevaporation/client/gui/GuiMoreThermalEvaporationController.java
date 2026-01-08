@@ -10,14 +10,16 @@ import mekanism.client.gui.element.gauge.GaugeType;
 import mekanism.client.gui.element.gauge.GuiFluidGauge;
 import mekanism.client.gui.element.tab.GuiHeatTab;
 import mekanism.client.gui.element.tab.GuiWarningTab;
+import mekanism.client.jei.MekanismJEIRecipeType;
 import mekanism.common.MekanismLang;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.inventory.warning.IWarningTracker;
 import mekanism.common.inventory.warning.WarningTracker.WarningType;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.UnitDisplayUtils.TemperatureUnit;
-import morethermalevaporation.common.evaporation.EliteThermalEvaporationMultiblockData;
-import morethermalevaporation.tile.multiblock.TileEntityEliteThermalEvaporationController;
+import morethermalevaporation.common.content.evaporation.MoreThermalEvaporationMultiblockData;
+import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
+import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationController;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -27,25 +29,28 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 
-public class GuiEliteThermalEvaporationController extends GuiMekanismTile<TileEntityEliteThermalEvaporationController, MekanismTileContainer<TileEntityEliteThermalEvaporationController>> {
+public class GuiMoreThermalEvaporationController extends GuiMekanismTile<TileEntityMoreThermalEvaporationController, MekanismTileContainer<TileEntityMoreThermalEvaporationController>> {
 
-    public GuiEliteThermalEvaporationController(MekanismTileContainer<TileEntityEliteThermalEvaporationController> container, Inventory inv, Component title) {
+    private final MoreThermalEvaporationTier tier;
+
+    public GuiMoreThermalEvaporationController(MekanismTileContainer<TileEntityMoreThermalEvaporationController> container, Inventory inv, Component title) {
         super(container, inv, title);
         inventoryLabelY += 2;
         titleLabelY = 4;
         dynamicSlots = true;
+        this.tier = getTileEntity().getTier();
     }
 
     @Override
     protected void addGuiElements() {
         super.addGuiElements();
         addRenderableWidget(new GuiInnerScreen(this, 48, 19, 80, 40, () -> {
-                    EliteThermalEvaporationMultiblockData multiblock = tile.getMultiblock();
+                    MoreThermalEvaporationMultiblockData multiblock = tile.getMultiblock();
                     return List.of(MekanismLang.MULTIBLOCK_FORMED.translate(), MekanismLang.EVAPORATION_HEIGHT.translate(multiblock.height()),
                             MekanismLang.TEMPERATURE.translate(MekanismUtils.getTemperatureDisplay(multiblock.getTemperature(), TemperatureUnit.KELVIN, true)),
                             MekanismLang.FLUID_PRODUCTION.translate(Math.round(multiblock.lastGain * 100D) / 100D));
                 }).spacing(1)
-//                .jeiCategory(tile) // TODO JEIのクラッシュを修正
+                        .jeiCategories(MekanismJEIRecipeType.EVAPORATING)
         );
         addRenderableWidget(new GuiDownArrow(this, 32, 39));
         addRenderableWidget(new GuiDownArrow(this, 136, 39));
@@ -57,7 +62,7 @@ public class GuiEliteThermalEvaporationController extends GuiMekanismTile<TileEn
 
             @Override
             public double getLevel() {
-                return Math.min(1, tile.getMultiblock().getTemperature() / EliteThermalEvaporationMultiblockData.MAX_MULTIPLIER_TEMP);
+                return Math.min(1, tile.getMultiblock().getTemperature() / tier.getMultiplierTemp());
             }
         }, 48, 63))
                 //Note: We just apply this warning to the bar as we don't have an arrow or anything here

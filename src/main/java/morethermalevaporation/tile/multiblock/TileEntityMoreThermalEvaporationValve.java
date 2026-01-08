@@ -8,16 +8,17 @@ import mekanism.common.capabilities.holder.heat.IHeatCapacitorHolder;
 import mekanism.common.capabilities.holder.slot.IInventorySlotHolder;
 import mekanism.common.tile.base.SubstanceType;
 import morethermalevaporation.common.registries.MoreThermalEvaporationBlocks;
+import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
-public class TileEntityBasicThermalEvaporationValve extends TileEntityBasicThermalEvaporationBlock {
+public class TileEntityMoreThermalEvaporationValve extends TileEntityMoreThermalEvaporationBlock {
 
-    public TileEntityBasicThermalEvaporationValve(BlockPos pos, BlockState state) {
-        super(MoreThermalEvaporationBlocks.BASIC_THERMAL_EVAPORATION_VALVE, pos, state);
+    public TileEntityMoreThermalEvaporationValve(MoreThermalEvaporationTier tier, BlockPos pos, BlockState state) {
+        super(MoreThermalEvaporationBlocks.getValve(tier), pos, state);
     }
 
     @NotNull
@@ -40,7 +41,6 @@ public class TileEntityBasicThermalEvaporationValve extends TileEntityBasicTherm
 
     @Override
     public boolean persists(SubstanceType type) {
-
         if (type == SubstanceType.FLUID || type == SubstanceType.HEAT) {
             return false;
         }
