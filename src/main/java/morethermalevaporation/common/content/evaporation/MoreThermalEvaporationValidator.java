@@ -1,4 +1,4 @@
-package morethermalevaporation.common.evaporation;
+package morethermalevaporation.common.content.evaporation;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import mekanism.common.MekanismLang;
@@ -12,9 +12,9 @@ import mekanism.common.lib.multiblock.FormationProtocol.CasingType;
 import mekanism.common.lib.multiblock.FormationProtocol.FormationResult;
 import mekanism.common.lib.multiblock.FormationProtocol.StructureRequirement;
 import mekanism.common.lib.multiblock.StructureHelper;
-import morethermalevaporation.common.config.MoreThermalEvaporationConfig;
 import morethermalevaporation.common.registries.MoreThermalEvaporationBlockTypes;
-import morethermalevaporation.tile.multiblock.TileEntityAdvancedThermalEvaporationController;
+import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
+import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationController;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,15 +22,19 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 
 import java.util.EnumSet;
 
-public class AdvancedThermalEvaporationValidator extends CuboidStructureValidator<AdvancedThermalEvaporationMultiblockData> {
+public class MoreThermalEvaporationValidator extends CuboidStructureValidator<MoreThermalEvaporationMultiblockData> {
 
     private static final VoxelCuboid MIN_CUBOID = new VoxelCuboid(4, 3, 4);
-
+    private final MoreThermalEvaporationTier tier;
     private boolean foundController = false;
 
+    public MoreThermalEvaporationValidator(MoreThermalEvaporationTier tier) {
+        this.tier = tier;
+    }
+
     @Override
-    protected FormationResult validateFrame(FormationProtocol<AdvancedThermalEvaporationMultiblockData> ctx, BlockPos pos, BlockState state, CasingType type, boolean needsFrame) {
-        boolean controller = structure.getTile(pos) instanceof TileEntityAdvancedThermalEvaporationController;
+    protected FormationResult validateFrame(FormationProtocol<MoreThermalEvaporationMultiblockData> ctx, BlockPos pos, BlockState state, CasingType type, boolean needsFrame) {
+        boolean controller = structure.getTile(pos) instanceof TileEntityMoreThermalEvaporationController;
         if (foundController && controller) {
             return FormationResult.fail(MekanismLang.MULTIBLOCK_INVALID_CONTROLLER_CONFLICT, pos, true);
         }
@@ -56,11 +60,11 @@ public class AdvancedThermalEvaporationValidator extends CuboidStructureValidato
     @Override
     protected CasingType getCasingType(BlockState state) {
         Block block = state.getBlock();
-        if (BlockType.is(block, MoreThermalEvaporationBlockTypes.ADVANCED_THERMAL_EVAPORATION_BLOCK)) {
+        if (BlockType.is(block, MoreThermalEvaporationBlockTypes.getBlockTypeBlock(tier))) {
             return CasingType.FRAME;
-        } else if (BlockType.is(block, MoreThermalEvaporationBlockTypes.ADVANCED_THERMAL_EVAPORATION_VALVE)) {
+        } else if (BlockType.is(block, MoreThermalEvaporationBlockTypes.getBlockTypeValve(tier))) {
             return CasingType.VALVE;
-        } else if (BlockType.is(block, MoreThermalEvaporationBlockTypes.ADVANCED_THERMAL_EVAPORATION_CONTROLLER)) {
+        } else if (BlockType.is(block, MoreThermalEvaporationBlockTypes.getBlockTypeController(tier))) {
             return CasingType.OTHER;
         }
         return CasingType.INVALID;
@@ -68,14 +72,13 @@ public class AdvancedThermalEvaporationValidator extends CuboidStructureValidato
 
     @Override
     public boolean precheck() {
-        int maxHeight = MoreThermalEvaporationConfig.AdvancedEvaporationPlantHeight.get();
-        VoxelCuboid maxCuboid = new VoxelCuboid(4, maxHeight, 4);
+        VoxelCuboid maxCuboid = new VoxelCuboid(4, tier.getHeight(), 4);
         cuboid = StructureHelper.fetchCuboid(structure, MIN_CUBOID, maxCuboid, EnumSet.complementOf(EnumSet.of(CuboidSide.TOP)), 8);
         return cuboid != null;
     }
 
     @Override
-    public FormationResult postcheck(AdvancedThermalEvaporationMultiblockData structure, Long2ObjectMap<ChunkAccess> chunkMap) {
+    public FormationResult postcheck(MoreThermalEvaporationMultiblockData structure, Long2ObjectMap<ChunkAccess> chunkMap) {
         if (!foundController) {
             return FormationResult.fail(MekanismLang.MULTIBLOCK_INVALID_NO_CONTROLLER);
         }
