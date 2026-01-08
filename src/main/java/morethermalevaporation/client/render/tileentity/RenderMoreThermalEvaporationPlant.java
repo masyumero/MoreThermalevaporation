@@ -8,6 +8,7 @@ import mekanism.client.render.data.RenderData;
 import mekanism.client.render.tileentity.MultiblockTileEntityRenderer;
 import morethermalevaporation.common.config.MoreThermalEvaporationConfig;
 import morethermalevaporation.common.content.evaporation.MoreThermalEvaporationMultiblockData;
+import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
 import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationController;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.Sheets;
@@ -18,24 +19,26 @@ import net.minecraft.world.phys.Vec3;
 @NothingNullByDefault
 public class RenderMoreThermalEvaporationPlant extends MultiblockTileEntityRenderer<MoreThermalEvaporationMultiblockData, TileEntityMoreThermalEvaporationController> {
 
-    public RenderMoreThermalEvaporationPlant(BlockEntityRendererProvider.Context context) {
+    private final MoreThermalEvaporationTier tier;
+
+    public RenderMoreThermalEvaporationPlant(MoreThermalEvaporationTier tier, BlockEntityRendererProvider.Context context) {
         super(context);
+        this.tier = tier;
     }
 
     @Override
-    protected void render(TileEntityMoreThermalEvaporationController tile, MoreThermalEvaporationMultiblockData multiblock, float partialTick, PoseStack matrix, MultiBufferSource renderer,
-                          int light, int overlayLight, ProfilerFiller profiler) {
+    protected void render(TileEntityMoreThermalEvaporationController tile, MoreThermalEvaporationMultiblockData multiblock, float partialTick, PoseStack matrix, MultiBufferSource renderer, int light, int overlayLight, ProfilerFiller profiler) {
         VertexConsumer buffer = renderer.getBuffer(Sheets.translucentCullBlockSheet());
         FluidRenderData data = RenderData.Builder.create(multiblock.inputTank.getFluid())
-                .of(multiblock)
-                .height(multiblock.height() - 2)    // TODO なぜか液体の描画が1ブロック分多い
+                .location(multiblock.renderLocation.offset(1, 0, 1))
+                .dimensions(2, multiblock.height() - 2, 2)
                 .build();
         renderObject(data, multiblock.valves, tile.getBlockPos(), matrix, buffer, overlayLight, Math.min(1, multiblock.prevScale));
     }
 
     @Override
     protected String getProfilerSection() {
-        return "MoreThermalEvaporationController";
+        return tier.getBaseTier().getLowerName() + "ThermalEvaporationController";
     }
 
     @Override
