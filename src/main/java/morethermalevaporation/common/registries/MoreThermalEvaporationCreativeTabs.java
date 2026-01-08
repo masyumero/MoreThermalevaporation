@@ -31,7 +31,6 @@ public class MoreThermalEvaporationCreativeTabs {
                         output.accept(MoreThermalEvaporationBlocks.ULTIMATE_THERMAL_EVAPORATION_BLOCK.getBlock());
                         output.accept(MoreThermalEvaporationBlocks.ULTIMATE_THERMAL_EVAPORATION_VALVE.getBlock());
                         output.accept(MoreThermalEvaporationBlocks.ULTIMATE_THERMAL_EVAPORATION_CONTROLLER.getBlock());
-
                     })
                     .build()
     );
