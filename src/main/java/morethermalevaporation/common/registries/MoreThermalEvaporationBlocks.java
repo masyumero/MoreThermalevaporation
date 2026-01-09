@@ -9,9 +9,9 @@ import mekanism.common.tile.base.TileEntityMekanism;
 import morethermalevaporation.MoreThermalEvaporation;
 import morethermalevaporation.common.item.block.ItemBlockMoreThermalEvaporation;
 import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
-import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationBlock;
-import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationController;
-import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationValve;
+import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationBlock;
+import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationController;
+import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationValve;
 import net.minecraft.world.level.material.MapColor;
 
 public class MoreThermalEvaporationBlocks {

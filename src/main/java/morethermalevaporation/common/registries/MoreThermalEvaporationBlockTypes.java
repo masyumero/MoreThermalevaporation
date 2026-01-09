@@ -8,9 +8,9 @@ import mekanism.common.content.blocktype.BlockTypeTile;
 import mekanism.common.content.blocktype.BlockTypeTile.BlockTileBuilder;
 import morethermalevaporation.common.MoreThermalEvaporationLang;
 import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
-import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationBlock;
-import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationController;
-import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationValve;
+import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationBlock;
+import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationController;
+import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationValve;
 
 public class MoreThermalEvaporationBlockTypes {
     // Basic

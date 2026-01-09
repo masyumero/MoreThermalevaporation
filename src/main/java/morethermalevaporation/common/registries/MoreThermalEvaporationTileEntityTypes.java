@@ -5,9 +5,9 @@ import mekanism.common.registration.impl.TileEntityTypeRegistryObject;
 import mekanism.common.tile.base.TileEntityMekanism;
 import morethermalevaporation.MoreThermalEvaporation;
 import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
-import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationBlock;
-import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationController;
-import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationValve;
+import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationBlock;
+import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationController;
+import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationValve;
 
 public class MoreThermalEvaporationTileEntityTypes {
     public static final TileEntityTypeDeferredRegister TILE_ENTITY_TYPES = new TileEntityTypeDeferredRegister(MoreThermalEvaporation.MODID);

@@ -1,4 +1,4 @@
-package morethermalevaporation.tile.multiblock;
+package morethermalevaporation.common.tile.multiblock;
 
 import mekanism.api.providers.IBlockProvider;
 import mekanism.common.block.attribute.Attribute;

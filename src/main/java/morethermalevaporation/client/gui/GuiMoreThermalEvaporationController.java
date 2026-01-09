@@ -19,7 +19,7 @@ import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.UnitDisplayUtils.TemperatureUnit;
 import morethermalevaporation.common.content.evaporation.MoreThermalEvaporationMultiblockData;
 import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
-import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationController;
+import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationController;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;

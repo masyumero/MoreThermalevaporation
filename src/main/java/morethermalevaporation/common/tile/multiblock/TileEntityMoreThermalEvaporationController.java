@@ -1,4 +1,4 @@
-package morethermalevaporation.tile.multiblock;
+package morethermalevaporation.common.tile.multiblock;
 
 import morethermalevaporation.common.content.evaporation.MoreThermalEvaporationMultiblockData;
 import morethermalevaporation.common.registries.MoreThermalEvaporationBlocks;
