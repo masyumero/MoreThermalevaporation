@@ -1,5 +1,6 @@
 package morethermalevaporation.common.registries;
 
+import mekanism.api.Upgrade;
 import mekanism.common.MekanismLang;
 import mekanism.common.block.attribute.AttributeStateFacing;
 import mekanism.common.block.attribute.AttributeTier;
@@ -11,6 +12,8 @@ import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
 import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationBlock;
 import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationController;
 import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationValve;
+
+import java.util.EnumSet;
 
 public class MoreThermalEvaporationBlockTypes {
     // Basic
@@ -108,6 +111,7 @@ public class MoreThermalEvaporationBlockTypes {
     private static BlockTypeTile<TileEntityMoreThermalEvaporationController> createMoreThermalEvaporationController(MoreThermalEvaporationTier tier, MoreThermalEvaporationLang lang) {
         return BlockTileBuilder.createBlock(() -> MoreThermalEvaporationTileEntityTypes.getTileEntityTypeController(tier), lang)
                 .withGui(() -> MoreThermalEvaporationContainerTypes.getContainerTypes(tier), MekanismLang.EVAPORATION_PLANT)
+                .withSupportedUpgrades(EnumSet.of(Upgrade.ANCHOR))
                 .with(new AttributeTier<>(tier), Attributes.INVENTORY, Attributes.ACTIVE, new AttributeStateFacing(), new Attributes.AttributeCustomResistance(9))
                 .externalMultiblock()
                 .withComputerSupport(tier.getBaseTier().getLowerName() + "ThermalEvaporationController")
