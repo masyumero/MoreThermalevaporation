@@ -40,7 +40,7 @@ import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.NBTUtils;
 import mekanism.common.util.WorldUtils;
 import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
-import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationBlock;
+import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -60,7 +60,6 @@ import java.util.function.BooleanSupplier;
 public class MoreThermalEvaporationMultiblockData extends MultiblockData implements IValveHandler, FluidRecipeLookupHandler<FluidToFluidRecipe> {
 
     public static final int MAX_HEIGHT = 18;
-    //    public static final double MAX_MULTIPLIER_TEMP = 12_000;
     private static final List<RecipeError> TRACKED_ERROR_TYPES = List.of(
             RecipeError.NOT_ENOUGH_INPUT,
             RecipeError.NOT_ENOUGH_OUTPUT_SPACE,
@@ -74,7 +73,7 @@ public class MoreThermalEvaporationMultiblockData extends MultiblockData impleme
     final FluidInventorySlot inputOutputSlot;
     @WrappingComputerMethod(wrapper = ComputerIInventorySlotWrapper.class, methodNames = "getOutputItemOutput", docPlaceholder = "output side's output slot")
     final OutputInventorySlot outputOutputSlot;
-    private final MoreThermalEvaporationTier tier;
+    private MoreThermalEvaporationTier tier;
     private final RecipeCacheLookupMonitor<FluidToFluidRecipe> recipeCacheLookupMonitor;
     private final BooleanSupplier recheckAllRecipeErrors;
     @ContainerSync
