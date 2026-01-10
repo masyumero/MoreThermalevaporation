@@ -14,7 +14,7 @@ import mekanism.common.lib.multiblock.FormationProtocol.StructureRequirement;
 import mekanism.common.lib.multiblock.StructureHelper;
 import morethermalevaporation.common.registries.MoreThermalEvaporationBlockTypes;
 import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
-import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationController;
+import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationController;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;

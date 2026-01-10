@@ -9,7 +9,7 @@ import mekanism.client.render.tileentity.MultiblockTileEntityRenderer;
 import morethermalevaporation.common.config.MoreThermalEvaporationConfig;
 import morethermalevaporation.common.content.evaporation.MoreThermalEvaporationMultiblockData;
 import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
-import morethermalevaporation.tile.multiblock.TileEntityMoreThermalEvaporationController;
+import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationController;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -43,6 +43,6 @@ public class RenderMoreThermalEvaporationPlant extends MultiblockTileEntityRende
 
     @Override
     protected boolean shouldRender(TileEntityMoreThermalEvaporationController tile, MoreThermalEvaporationMultiblockData multiblock, Vec3 camera) {
-        return super.shouldRender(tile, multiblock, camera) && !multiblock.inputTank.isEmpty() && MoreThermalEvaporationConfig.RenderFluid.get();
+        return super.shouldRender(tile, multiblock, camera) && !multiblock.inputTank.isEmpty() && MoreThermalEvaporationConfig.config.RenderFluid.get();
     }
 }
