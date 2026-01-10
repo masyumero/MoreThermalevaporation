@@ -65,14 +65,14 @@ side = "BOTH"
 [[dependencies."${mod_id}"]]
 modId = "mekanism"
 mandatory = true
-versionRange = "[10.4.10,]"
+versionRange = "[10.4.8,]"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies."${mod_id}"]]
 modId = "jei"
 mandatory = true
-versionRange = "[15.2.0,]"
+versionRange = "[15.20.0,]"
 ordering = "NONE"
 side = "BOTH"
 

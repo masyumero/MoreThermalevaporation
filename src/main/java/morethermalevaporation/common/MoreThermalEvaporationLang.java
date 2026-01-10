@@ -3,6 +3,7 @@ package morethermalevaporation.common;
 import mekanism.api.annotations.NothingNullByDefault;
 import mekanism.api.text.ILangEntry;
 import morethermalevaporation.MoreThermalEvaporation;
+import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
 import net.minecraft.Util;
 
 @NothingNullByDefault
@@ -58,5 +59,14 @@ public enum MoreThermalEvaporationLang implements ILangEntry {
     @Override
     public String getTranslationKey() {
         return key;
+    }
+
+    public static MoreThermalEvaporationLang getPlant(MoreThermalEvaporationTier tier) {
+        return switch (tier) {
+            case BASIC -> BASIC_EVAPORATION_PLANT;
+            case ADVANCED -> ADVANCED_EVAPORATION_PLANT;
+            case ELITE -> ELITE_EVAPORATION_PLANT;
+            case ULTIMATE -> ULTIMATE_EVAPORATION_PLANT;
+        };
     }
 }
