@@ -25,7 +25,7 @@ public class MoreThermalEvaporationContainerTypes {
     private MoreThermalEvaporationContainerTypes() {
     }
 
-    public static ContainerTypeRegistryObject<MekanismTileContainer<TileEntityMoreThermalEvaporationController>> getContainerTypes(MoreThermalEvaporationTier tier) {
+    public static ContainerTypeRegistryObject<MekanismTileContainer<TileEntityMoreThermalEvaporationController>> getContainerType(MoreThermalEvaporationTier tier) {
         return switch (tier) {
             case BASIC -> BASIC_THERMAL_EVAPORATION_CONTROLLER;
             case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_CONTROLLER;

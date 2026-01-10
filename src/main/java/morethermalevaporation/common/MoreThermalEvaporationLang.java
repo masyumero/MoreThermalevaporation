@@ -61,7 +61,7 @@ public enum MoreThermalEvaporationLang implements ILangEntry {
         return key;
     }
 
-    public static MoreThermalEvaporationLang getPlant(MoreThermalEvaporationTier tier) {
+    public static MoreThermalEvaporationLang getLangPlant(MoreThermalEvaporationTier tier) {
         return switch (tier) {
             case BASIC -> BASIC_EVAPORATION_PLANT;
             case ADVANCED -> ADVANCED_EVAPORATION_PLANT;

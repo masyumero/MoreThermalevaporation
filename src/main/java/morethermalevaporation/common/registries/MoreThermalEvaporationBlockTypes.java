@@ -110,7 +110,7 @@ public class MoreThermalEvaporationBlockTypes {
 
     private static BlockTypeTile<TileEntityMoreThermalEvaporationController> createMoreThermalEvaporationController(MoreThermalEvaporationTier tier, MoreThermalEvaporationLang lang) {
         return BlockTileBuilder.createBlock(() -> MoreThermalEvaporationTileEntityTypes.getTileEntityTypeController(tier), lang)
-                .withGui(() -> MoreThermalEvaporationContainerTypes.getContainerTypes(tier), MekanismLang.EVAPORATION_PLANT)
+                .withGui(() -> MoreThermalEvaporationContainerTypes.getContainerType(tier), MekanismLang.EVAPORATION_PLANT)
                 .withSupportedUpgrades(EnumSet.of(Upgrade.ANCHOR))
                 .with(new AttributeTier<>(tier), Attributes.INVENTORY, Attributes.ACTIVE, new AttributeStateFacing(), new Attributes.AttributeCustomResistance(9))
                 .externalMultiblock()

@@ -29,7 +29,7 @@ public class ClientRegistration {
     public static void registerContainers(RegisterEvent event) {
         event.register(Registries.MENU, helper -> {
             for (MoreThermalEvaporationTier tier : MoreThermalEvaporationTier.values()) {
-                ClientRegistrationUtil.registerScreen(MoreThermalEvaporationContainerTypes.getContainerTypes(tier), GuiMoreThermalEvaporationController::new);
+                ClientRegistrationUtil.registerScreen(MoreThermalEvaporationContainerTypes.getContainerType(tier), GuiMoreThermalEvaporationController::new);
             }
         });
     }
