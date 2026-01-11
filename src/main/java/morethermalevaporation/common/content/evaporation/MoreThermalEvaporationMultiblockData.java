@@ -59,7 +59,7 @@ import java.util.function.BooleanSupplier;
 
 public class MoreThermalEvaporationMultiblockData extends MultiblockData implements IValveHandler, FluidRecipeLookupHandler<FluidToFluidRecipe> {
 
-    public static final int MAX_HEIGHT = 18;
+    public static final int MAX_HEIGHT = 18; // 計算に使用する値のためプラントの最大高さとは無関係
     private static final List<RecipeError> TRACKED_ERROR_TYPES = List.of(
             RecipeError.NOT_ENOUGH_INPUT,
             RecipeError.NOT_ENOUGH_OUTPUT_SPACE,
