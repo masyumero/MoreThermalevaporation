@@ -20,6 +20,7 @@ import mekanism.generators.common.registries.GeneratorsBlocks;
 import mezz.jei.api.helpers.IGuiHelper;
 import morethermalevaporation.MoreThermalEvaporation;
 import morethermalevaporation.common.MoreThermalEvaporationLang;
+import morethermalevaporation.common.content.evaporation.MoreThermalEvaporationMultiblockData;
 import morethermalevaporation.common.registries.MoreThermalEvaporationBlocks;
 import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -34,7 +35,7 @@ public class MoreEvaporationPlantCategory extends MultiblockCategory<MoreEvapora
     private final MoreThermalEvaporationTier tier;
 
     public MoreEvaporationPlantCategory(IGuiHelper helper, MoreThermalEvaporationTier tier, Class<? extends MoreEvaporationPlantWidget> widgetClass) {
-        // JEI表示順の為にティア順をパスに追加
+        // TODO JEI表示順の為にティア順をパスに追加
         super(helper, MoreThermalEvaporation.rl(tier.ordinal() + "_" + tier.getBaseTier().getLowerName() + "_evaporation_plant"), widgetClass, MoreThermalEvaporationLang.getLangPlant(tier).translate(), MoreThermalEvaporationBlocks.getController(tier).getItemStack());
         this.tier = tier;
     }
@@ -192,7 +193,8 @@ public class MoreEvaporationPlantCategory extends MultiblockCategory<MoreEvapora
             long inputCapacity = dimHeight * 4 * MekanismConfig.general.evaporationFluidPerTank.get();
             long outputCapacity = tier.getOutputTankCapacity();
             double maxTemp = tier.getMultiplierTemp();
-            double maxSpeed = (maxTemp - HeatAPI.AMBIENT_TEMP) * MekanismConfig.general.evaporationTempMultiplier.get() * ((double) dimHeight / this.getDimensionHeightMax());
+            // TODO スライダーとgetDimensionHeightMax()が連動しているが計算が合わないので変更
+            double maxSpeed = (maxTemp - HeatAPI.AMBIENT_TEMP) * MekanismConfig.general.evaporationTempMultiplier.get() * ((double) dimHeight / MoreThermalEvaporationMultiblockData.MAX_HEIGHT);
             ResultWidget speedWidget = new ResultWidget(Component.translatable("text.jei_mekanism_multiblocks.result.max_speed"), Component.literal("x" + TextUtils.format(maxSpeed)));
             speedWidget.setTooltip(TooltipHelper.createMessageOnly(Component.translatable("text.jei_mekanism_multiblocks.tooltip.when_temp_ge", MekanismUtils.getTemperatureDisplay(maxTemp, TemperatureUnit.KELVIN, false))));
             consumer.accept(speedWidget);
