@@ -191,7 +191,7 @@ public class MoreEvaporationPlantCategory extends MultiblockCategory<MoreEvapora
             MoreThermalEvaporationTier tier = getTier();
 
             long dimHeight = this.getDimensionHeight();
-            long inputCapacity = tier == MoreThermalEvaporationTier.CREATIVE ? Integer.MAX_VALUE : dimHeight * 4 * MekanismConfig.general.evaporationFluidPerTank.get();
+            long inputCapacity = tier == MoreThermalEvaporationTier.CREATIVE ? Integer.MAX_VALUE : dimHeight * 4 * tier.getInputTankCapacity();
             long outputCapacity = tier.getOutputTankCapacity();
             double maxTemp = tier.getMultiplierTemp();
             // TODO スライダーとgetDimensionHeightMax()が連動しているが計算が合わないので変更

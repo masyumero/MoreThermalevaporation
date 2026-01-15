@@ -10,16 +10,16 @@ import javax.annotation.Nullable;
 
 @NothingNullByDefault
 public enum MoreThermalEvaporationTier implements ITier {
-    BASIC(BaseTier.BASIC, 6_000, 18, 20000),
-    ADVANCED(BaseTier.ADVANCED, 12_000, 18, 80000),
-    ELITE(BaseTier.ELITE, 24_000, 18, 640000),
-    ULTIMATE(BaseTier.ULTIMATE, 48_000, 18, 10240000),
-    CREATIVE(BaseTier.CREATIVE,Integer.MAX_VALUE,18,Integer.MAX_VALUE)
-    ;
+    BASIC(BaseTier.BASIC, 6_000, 18, 128000, 20000),
+    ADVANCED(BaseTier.ADVANCED, 12_000, 18, 256000, 80000),
+    ELITE(BaseTier.ELITE, 24_000, 18, 512000, 640000),
+    ULTIMATE(BaseTier.ULTIMATE, 48_000, 18, 1024000, 10240000),
+    CREATIVE(BaseTier.CREATIVE, Integer.MAX_VALUE, 18, Integer.MAX_VALUE, Integer.MAX_VALUE);
 
     private final BaseTier baseTier;
     private final double baseMultiplierTemp;
     private final int baseHeight;
+    private final int baseInputTankCapacity;
     private final int baseOutputTankCapacity;
 
     @Nullable
@@ -27,12 +27,15 @@ public enum MoreThermalEvaporationTier implements ITier {
     @Nullable
     private CachedIntValue heightReference;
     @Nullable
+    private CachedIntValue inputTankCapacityReference;
+    @Nullable
     private CachedIntValue outputTankCapacityReference;
 
-    MoreThermalEvaporationTier(BaseTier baseTier, double baseMultiplierTemp, int baseHeight, int baseOutputTankCapacity) {
+    MoreThermalEvaporationTier(BaseTier baseTier, double baseMultiplierTemp, int baseHeight, int baseInputTankCapacity, int baseOutputTankCapacity) {
         this.baseTier = baseTier;
         this.baseMultiplierTemp = baseMultiplierTemp;
         this.baseHeight = baseHeight;
+        this.baseInputTankCapacity = baseInputTankCapacity;
         this.baseOutputTankCapacity = baseOutputTankCapacity;
     }
 
@@ -49,6 +52,10 @@ public enum MoreThermalEvaporationTier implements ITier {
         return heightReference == null ? getBaseHeight() : heightReference.getOrDefault();
     }
 
+    public int getInputTankCapacity() {
+        return inputTankCapacityReference == null ? getBaseInputTankCapacity() : inputTankCapacityReference.getOrDefault();
+    }
+
     public int getOutputTankCapacity() {
         return outputTankCapacityReference == null ? getBaseOutputTankCapacity() : outputTankCapacityReference.getOrDefault();
     }
@@ -61,6 +68,10 @@ public enum MoreThermalEvaporationTier implements ITier {
         return baseHeight;
     }
 
+    public int getBaseInputTankCapacity() {
+        return baseInputTankCapacity;
+    }
+
     public int getBaseOutputTankCapacity() {
         return baseOutputTankCapacity;
     }
@@ -68,9 +79,10 @@ public enum MoreThermalEvaporationTier implements ITier {
     /**
      * ONLY CALL THIS FROM TierConfig. It is used to give the FluidTankTier a reference to the actual config value object
      */
-    public void setConfigReference(CachedDoubleValue multiplierTempReference, CachedIntValue heightReference, CachedIntValue outputTankCapacityReference) {
+    public void setConfigReference(CachedDoubleValue multiplierTempReference, CachedIntValue heightReference, CachedIntValue inputTankCapacityReference, CachedIntValue outputTankCapacityReference) {
         this.multiplierTempReference = multiplierTempReference;
         this.heightReference = heightReference;
+        this.inputTankCapacityReference = inputTankCapacityReference;
         this.outputTankCapacityReference = outputTankCapacityReference;
     }
 }

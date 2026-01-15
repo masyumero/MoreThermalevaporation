@@ -73,7 +73,6 @@ public class MoreThermalEvaporationMultiblockData extends MultiblockData impleme
     final FluidInventorySlot inputOutputSlot;
     @WrappingComputerMethod(wrapper = ComputerIInventorySlotWrapper.class, methodNames = "getOutputItemOutput", docPlaceholder = "output side's output slot")
     final OutputInventorySlot outputOutputSlot;
-    private MoreThermalEvaporationTier tier;
     private final RecipeCacheLookupMonitor<FluidToFluidRecipe> recipeCacheLookupMonitor;
     private final BooleanSupplier recheckAllRecipeErrors;
     @ContainerSync
@@ -97,6 +96,7 @@ public class MoreThermalEvaporationMultiblockData extends MultiblockData impleme
     @ContainerSync
     @SyntheticComputerMethod(getter = "getEnvironmentalLoss")
     public double lastEnvironmentLoss;
+    private MoreThermalEvaporationTier tier;
     private double biomeAmbientTemp;
     private double maxMultiplierTemp;
     private double tempMultiplier;
@@ -197,9 +197,7 @@ public class MoreThermalEvaporationMultiblockData extends MultiblockData impleme
         if (getVolume() != volume) {
             super.setVolume(volume);
             //Note: We only count the inner volume for the tank capacity for the evap tower
-            inputTankCapacity = this.tier == MoreThermalEvaporationTier.CREATIVE
-                    ? Integer.MAX_VALUE
-                    : (volume / 4) * MekanismConfig.general.evaporationFluidPerTank.get();
+            inputTankCapacity = (volume / 4) * tier.getInputTankCapacity();
         }
     }
 

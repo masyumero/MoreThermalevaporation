@@ -28,17 +28,20 @@ public class MoreThermalEvaporationPlantConfig extends BaseMekanismConfig {
         builder.comment("More Thermal Evaporations Settings").push("more_thermal_evaporation");
         for (MoreThermalEvaporationTier tier : MoreThermalEvaporationTier.values()) {
             String tierName = tier.getBaseTier().getSimpleName();
-            CachedDoubleValue multiplierTempReference = CachedDoubleValue.wrap(this, builder.comment("Maximum " + "temperature capping the temperature multiplier for the " + tierName + "Thermal Evaporation Plant.")
+            CachedDoubleValue multiplierTempReference = CachedDoubleValue.wrap(this, builder.comment("Maximum " + "temperature capping the temperature multiplier for the " + tierName + " Thermal Evaporation Plant.")
                     .defineInRange(tierName.toLowerCase(Locale.ROOT) + "ThermalEvaporationMultiplierTempCap",
                             tier.getBaseMultiplierTemp(), 3000, 2147483646));
 
-            CachedIntValue heightReference = CachedIntValue.wrap(this, builder.comment("Buildable Height (in blocks) for the " + tierName + "Thermal Evaporation Plant.")
+            CachedIntValue heightReference = CachedIntValue.wrap(this, builder.comment("Buildable Height (in blocks) for the " + tierName + " Thermal Evaporation Plant.")
                     .defineInRange(tierName.toLowerCase(Locale.ROOT) + "ThermalEvaporationHeight", tier.getBaseHeight(), 18, 2147483646));
 
-            CachedIntValue outputTankCapacityReference = CachedIntValue.wrap(this, builder.comment("Amount of output fluid (mB) that the " + tierName + "Thermal Evaporation Plant can store.")
+            CachedIntValue inputTankCapacityReference = CachedIntValue.wrap(this, builder.comment("Amount of fluid (mB) that each block of the " + tierName + " Thermal Evaporation Plant contributes to the input tank capacity. Max = volume * fluidPerTank")
+                    .defineInRange(tierName.toLowerCase(Locale.ROOT) + "ThermalEvaporationInputTankCapacity", tier.getBaseInputTankCapacity(), 1, 29826161));
+
+            CachedIntValue outputTankCapacityReference = CachedIntValue.wrap(this, builder.comment("Amount of output fluid (mB) that the " + tierName + " Thermal Evaporation Plant can store.")
                     .defineInRange(tierName.toLowerCase(Locale.ROOT) + "ThermalEvaporationOutputTankCapacity", tier.getBaseOutputTankCapacity(), 1, 2147483646));
 
-            tier.setConfigReference(multiplierTempReference, heightReference, outputTankCapacityReference);
+            tier.setConfigReference(multiplierTempReference, heightReference, inputTankCapacityReference, outputTankCapacityReference);
         }
     }
 
