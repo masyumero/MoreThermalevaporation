@@ -15,6 +15,10 @@
   "block.morethermalevaporation.ultimate_thermal_evaporation_controller": "Совершенный Контроллер теплового испарителя",
   "block.morethermalevaporation.ultimate_thermal_evaporation_valve": "Совершенный Вентиль теплового испарителя",
 
+  "block.morethermalevaporation.creative_thermal_evaporation_block": "Творческий Блок теплового испарителя",
+  "block.morethermalevaporation.creative_thermal_evaporation_controller": "Творческий Контроллер теплового испарителя",
+  "block.morethermalevaporation.creative_thermal_evaporation_valve": "Творческий Вентиль теплового испарителя",
+
   "description.morethermalevaporation.basic_thermal_evaporation_block": "Обшивка из сплава меди, используется в Базовый тепловом испарителе благодаря теплопроводности меди.",
   "description.morethermalevaporation.basic_thermal_evaporation_controller": "Контроллер для Базовый теплового испарителя, в структуре может быть только один.",
   "description.morethermalevaporation.basic_thermal_evaporation_valve": "Вентиль для Базовый теплового испарителя, используется для ввода и вывода жидкости.",
@@ -31,10 +35,15 @@
   "description.morethermalevaporation.ultimate_thermal_evaporation_controller": "Контроллер для Совершенный теплового испарителя, в структуре может быть только один.",
   "description.morethermalevaporation.ultimate_thermal_evaporation_valve": "Вентиль для Совершенный теплового испарителя, используется для ввода и вывода жидкости.",
 
-  "basic_evaporation.morethermalevaporation.basic_evaporation_plant" : "Базовый Установка теплового испарителя",
-  "advanced_evaporation.morethermalevaporation.advanced_evaporation_plant" : "Продвинутый Установка теплового испарителя",
-  "elite_evaporation.morethermalevaporation.elite_evaporation_plant" : "Элитный Установка теплового испарителя",
-  "ultimate_evaporation.morethermalevaporation.ultimate_evaporation_plant" : "Совершенный Установка теплового испарителя",
+  "description.morethermalevaporation.creative_thermal_evaporation_block": "Обшивка из сплава меди, используется в Творческий тепловом испарителе благодаря теплопроводности меди.",
+  "description.morethermalevaporation.creative_thermal_evaporation_controller": "Контроллер для Творческий теплового испарителя, в структуре может быть только один.",
+  "description.morethermalevaporation.creative_thermal_evaporation_valve": "Вентиль для Творческий теплового испарителя, используется для ввода и вывода жидкости.",
+
+  "evaporation.morethermalevaporation.basic_evaporation_plant" : "Базовый Установка теплового испарителя",
+  "evaporation.morethermalevaporation.advanced_evaporation_plant" : "Продвинутый Установка теплового испарителя",
+  "evaporation.morethermalevaporation.elite_evaporation_plant" : "Элитный Установка теплового испарителя",
+  "evaporation.morethermalevaporation.ultimate_evaporation_plant" : "Совершенный Установка теплового испарителя",
+  "evaporation.morethermalevaporation.creative_evaporation_plant" : "Творческий Установка теплового испарителя",
 
   "creativetab.morethermalevaporation.tab": "бо́лее теплового испарителя"
 }
