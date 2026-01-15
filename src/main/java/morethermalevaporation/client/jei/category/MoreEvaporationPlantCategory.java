@@ -57,6 +57,7 @@ public class MoreEvaporationPlantCategory extends MultiblockCategory<MoreEvapora
     public abstract static class MoreEvaporationPlantWidget extends MultiblockWidget {
         protected CheckBoxWidget useAdvancedSolarGeneratorCheckBox;
         protected IntSliderWithButtons valvesWidget;
+
         public MoreEvaporationPlantWidget() {
 
         }
@@ -190,7 +191,7 @@ public class MoreEvaporationPlantCategory extends MultiblockCategory<MoreEvapora
             MoreThermalEvaporationTier tier = getTier();
 
             long dimHeight = this.getDimensionHeight();
-            long inputCapacity = dimHeight * 4 * MekanismConfig.general.evaporationFluidPerTank.get();
+            long inputCapacity = tier == MoreThermalEvaporationTier.CREATIVE ? Integer.MAX_VALUE : dimHeight * 4 * MekanismConfig.general.evaporationFluidPerTank.get();
             long outputCapacity = tier.getOutputTankCapacity();
             double maxTemp = tier.getMultiplierTemp();
             // TODO スライダーとgetDimensionHeightMax()が連動しているが計算が合わないので変更
@@ -284,6 +285,13 @@ public class MoreEvaporationPlantCategory extends MultiblockCategory<MoreEvapora
         @Override
         protected MoreThermalEvaporationTier getTier() {
             return MoreThermalEvaporationTier.ULTIMATE;
+        }
+    }
+
+    public static class CreativeEvaporationPlantWidget extends MoreEvaporationPlantWidget {
+        @Override
+        protected MoreThermalEvaporationTier getTier() {
+            return MoreThermalEvaporationTier.CREATIVE;
         }
     }
 
