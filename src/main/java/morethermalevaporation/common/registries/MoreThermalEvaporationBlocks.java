@@ -106,6 +106,28 @@ public class MoreThermalEvaporationBlocks {
                     MoreThermalEvaporationBlockTypes.ULTIMATE_THERMAL_EVAPORATION_CONTROLLER
             );
 
+    // Creative
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationBlock>, ItemBlockMoreThermalEvaporation> CREATIVE_THERMAL_EVAPORATION_BLOCK =
+            registerMoreThermalEvaporationPart(
+                    BaseTier.CREATIVE,
+                    "block",
+                    MoreThermalEvaporationBlockTypes.CREATIVE_THERMAL_EVAPORATION_BLOCK
+            );
+
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationValve>, ItemBlockMoreThermalEvaporation> CREATIVE_THERMAL_EVAPORATION_VALVE =
+            registerMoreThermalEvaporationPart(
+                    BaseTier.CREATIVE,
+                    "valve",
+                    MoreThermalEvaporationBlockTypes.CREATIVE_THERMAL_EVAPORATION_VALVE
+            );
+
+    public static final BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationController>, ItemBlockMoreThermalEvaporation> CREATIVE_THERMAL_EVAPORATION_CONTROLLER =
+            registerMoreThermalEvaporationPart(
+                    BaseTier.CREATIVE,
+                    "controller",
+                    MoreThermalEvaporationBlockTypes.CREATIVE_THERMAL_EVAPORATION_CONTROLLER
+            );
+
     private MoreThermalEvaporationBlocks() {
     }
 
@@ -123,6 +145,7 @@ public class MoreThermalEvaporationBlocks {
             case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_BLOCK;
             case ELITE -> ELITE_THERMAL_EVAPORATION_BLOCK;
             case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_BLOCK;
+            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_BLOCK;
         };
     }
 
@@ -132,6 +155,7 @@ public class MoreThermalEvaporationBlocks {
             case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_VALVE;
             case ELITE -> ELITE_THERMAL_EVAPORATION_VALVE;
             case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_VALVE;
+            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_VALVE;
         };
     }
 
@@ -141,6 +165,7 @@ public class MoreThermalEvaporationBlocks {
             case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_CONTROLLER;
             case ELITE -> ELITE_THERMAL_EVAPORATION_CONTROLLER;
             case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_CONTROLLER;
+            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_CONTROLLER;
         };
     }
 }

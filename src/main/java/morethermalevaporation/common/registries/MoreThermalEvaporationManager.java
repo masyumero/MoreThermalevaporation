@@ -11,6 +11,7 @@ public class MoreThermalEvaporationManager {
     public static final MultiblockManager<MoreThermalEvaporationMultiblockData> AdvancedMoreThermalEvaporationManager = new MultiblockManager<>("AdvancedThermalEvaporation", MultiblockCache::new, () -> new MoreThermalEvaporationValidator(MoreThermalEvaporationTier.ADVANCED));
     public static final MultiblockManager<MoreThermalEvaporationMultiblockData> EliteMoreThermalEvaporationManager = new MultiblockManager<>("EliteThermalEvaporation", MultiblockCache::new, () -> new MoreThermalEvaporationValidator(MoreThermalEvaporationTier.ELITE));
     public static final MultiblockManager<MoreThermalEvaporationMultiblockData> UltimateMoreThermalEvaporationManager = new MultiblockManager<>("UltimateThermalEvaporation", MultiblockCache::new, () -> new MoreThermalEvaporationValidator(MoreThermalEvaporationTier.ULTIMATE));
+    public static final MultiblockManager<MoreThermalEvaporationMultiblockData> CreativeMoreThermalEvaporationManager = new MultiblockManager<>("CreativeThermalEvaporation", MultiblockCache::new, () -> new MoreThermalEvaporationValidator(MoreThermalEvaporationTier.CREATIVE));
 
     public static MultiblockManager<MoreThermalEvaporationMultiblockData> getManager(MoreThermalEvaporationTier tier) {
         return switch (tier) {
@@ -18,6 +19,7 @@ public class MoreThermalEvaporationManager {
             case ADVANCED -> AdvancedMoreThermalEvaporationManager;
             case ELITE -> EliteMoreThermalEvaporationManager;
             case ULTIMATE -> UltimateMoreThermalEvaporationManager;
+            case CREATIVE -> CreativeMoreThermalEvaporationManager;
         };
     }
 }

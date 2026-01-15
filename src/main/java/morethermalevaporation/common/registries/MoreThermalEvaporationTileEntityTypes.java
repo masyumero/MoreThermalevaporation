@@ -112,12 +112,38 @@ public class MoreThermalEvaporationTileEntityTypes {
                     TileEntityMekanism::tickClient
             );
 
+    // Creative
+    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationBlock> CREATIVE_THERMAL_EVAPORATION_BLOCK =
+            TILE_ENTITY_TYPES.register(
+                    MoreThermalEvaporationBlocks.getBlock(MoreThermalEvaporationTier.CREATIVE),
+                    (pos, state) -> new TileEntityMoreThermalEvaporationBlock(MoreThermalEvaporationTier.CREATIVE, pos, state),
+                    TileEntityMekanism::tickServer,
+                    TileEntityMekanism::tickClient
+            );
+
+    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationValve> CREATIVE_THERMAL_EVAPORATION_VALVE =
+            TILE_ENTITY_TYPES.register(
+                    MoreThermalEvaporationBlocks.getValve(MoreThermalEvaporationTier.CREATIVE),
+                    (pos, state) -> new TileEntityMoreThermalEvaporationValve(MoreThermalEvaporationTier.CREATIVE, pos, state),
+                    TileEntityMekanism::tickServer,
+                    TileEntityMekanism::tickClient
+            );
+
+    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationController> CREATIVE_THERMAL_EVAPORATION_CONTROLLER =
+            TILE_ENTITY_TYPES.register(
+                    MoreThermalEvaporationBlocks.getController(MoreThermalEvaporationTier.CREATIVE),
+                    (pos, state) -> new TileEntityMoreThermalEvaporationController(MoreThermalEvaporationTier.CREATIVE, pos, state),
+                    TileEntityMekanism::tickServer,
+                    TileEntityMekanism::tickClient
+            );
+
     public static TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationBlock> getTileEntityTypeBlock(MoreThermalEvaporationTier tier) {
         return switch (tier) {
             case BASIC -> BASIC_THERMAL_EVAPORATION_BLOCK;
             case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_BLOCK;
             case ELITE -> ELITE_THERMAL_EVAPORATION_BLOCK;
             case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_BLOCK;
+            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_BLOCK;
         };
     }
 
@@ -127,6 +153,7 @@ public class MoreThermalEvaporationTileEntityTypes {
             case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_VALVE;
             case ELITE -> ELITE_THERMAL_EVAPORATION_VALVE;
             case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_VALVE;
+            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_VALVE;
         };
     }
 
@@ -136,6 +163,7 @@ public class MoreThermalEvaporationTileEntityTypes {
             case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_CONTROLLER;
             case ELITE -> ELITE_THERMAL_EVAPORATION_CONTROLLER;
             case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_CONTROLLER;
+            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_CONTROLLER;
         };
     }
 

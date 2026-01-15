@@ -90,6 +90,23 @@ public class MoreThermalEvaporationBlockTypes {
                     MoreThermalEvaporationLang.DESCRIPTION_ULTIMATE_THERMAL_EVAPORATION_CONTROLLER
             );
 
+    // Creative
+    public static final BlockTypeTile<TileEntityMoreThermalEvaporationBlock> CREATIVE_THERMAL_EVAPORATION_BLOCK =
+            createMoreThermalEvaporationBlock(
+                    MoreThermalEvaporationTier.CREATIVE, MoreThermalEvaporationLang.DESCRIPTION_CREATIVE_THERMAL_EVAPORATION_BLOCK);
+
+    public static final BlockTypeTile<TileEntityMoreThermalEvaporationValve> CREATIVE_THERMAL_EVAPORATION_VALVE =
+            createMoreThermalEvaporationValve(
+                    MoreThermalEvaporationTier.CREATIVE,
+                    MoreThermalEvaporationLang.DESCRIPTION_CREATIVE_THERMAL_EVAPORATION_VALVE
+            );
+
+    public static final BlockTypeTile<TileEntityMoreThermalEvaporationController> CREATIVE_THERMAL_EVAPORATION_CONTROLLER =
+            createMoreThermalEvaporationController(
+                    MoreThermalEvaporationTier.CREATIVE,
+                    MoreThermalEvaporationLang.DESCRIPTION_CREATIVE_THERMAL_EVAPORATION_CONTROLLER
+            );
+
     private MoreThermalEvaporationBlockTypes() {
     }
 
@@ -124,6 +141,7 @@ public class MoreThermalEvaporationBlockTypes {
             case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_BLOCK;
             case ELITE -> ELITE_THERMAL_EVAPORATION_BLOCK;
             case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_BLOCK;
+            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_BLOCK;
         };
     }
 
@@ -133,6 +151,7 @@ public class MoreThermalEvaporationBlockTypes {
             case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_VALVE;
             case ELITE -> ELITE_THERMAL_EVAPORATION_VALVE;
             case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_VALVE;
+            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_VALVE;
         };
     }
 
@@ -142,6 +161,7 @@ public class MoreThermalEvaporationBlockTypes {
             case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_CONTROLLER;
             case ELITE -> ELITE_THERMAL_EVAPORATION_CONTROLLER;
             case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_CONTROLLER;
+            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_CONTROLLER;
         };
     }
 }

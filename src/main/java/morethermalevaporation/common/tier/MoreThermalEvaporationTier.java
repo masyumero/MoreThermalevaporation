@@ -13,7 +13,9 @@ public enum MoreThermalEvaporationTier implements ITier {
     BASIC(BaseTier.BASIC, 6_000, 18, 20000),
     ADVANCED(BaseTier.ADVANCED, 12_000, 18, 80000),
     ELITE(BaseTier.ELITE, 24_000, 18, 640000),
-    ULTIMATE(BaseTier.ULTIMATE, 48_000, 18, 10240000);
+    ULTIMATE(BaseTier.ULTIMATE, 48_000, 18, 10240000),
+    CREATIVE(BaseTier.CREATIVE,Integer.MAX_VALUE,18,Integer.MAX_VALUE)
+    ;
 
     private final BaseTier baseTier;
     private final double baseMultiplierTemp;

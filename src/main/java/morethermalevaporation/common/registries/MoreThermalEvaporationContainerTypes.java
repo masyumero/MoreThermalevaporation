@@ -22,6 +22,10 @@ public class MoreThermalEvaporationContainerTypes {
     // Ultimate
     public static final ContainerTypeRegistryObject<MekanismTileContainer<TileEntityMoreThermalEvaporationController>> ULTIMATE_THERMAL_EVAPORATION_CONTROLLER = CONTAINER_TYPES.register(MoreThermalEvaporationBlocks.getController(MoreThermalEvaporationTier.ULTIMATE), TileEntityMoreThermalEvaporationController.class);
 
+    // Creative
+    public static final ContainerTypeRegistryObject<MekanismTileContainer<TileEntityMoreThermalEvaporationController>> CREATIVE_THERMAL_EVAPORATION_CONTROLLER = CONTAINER_TYPES.register(MoreThermalEvaporationBlocks.getController(MoreThermalEvaporationTier.CREATIVE), TileEntityMoreThermalEvaporationController.class);
+
+
     private MoreThermalEvaporationContainerTypes() {
     }
 
@@ -31,6 +35,7 @@ public class MoreThermalEvaporationContainerTypes {
             case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_CONTROLLER;
             case ELITE -> ELITE_THERMAL_EVAPORATION_CONTROLLER;
             case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_CONTROLLER;
+            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_CONTROLLER;
         };
     }
 }
