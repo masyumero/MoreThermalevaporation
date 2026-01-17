@@ -39,12 +39,12 @@ public class TileEntityMoreThermalEvaporationBlock extends TileEntityMultiblock<
 
     @Override
     public MoreThermalEvaporationMultiblockData createMultiblock() {
-        return new MoreThermalEvaporationMultiblockData(this, tier);
+        return new MoreThermalEvaporationMultiblockData(this, this.tier);
     }
 
     @Override
     public MultiblockManager<MoreThermalEvaporationMultiblockData> getManager() {
-        return MoreThermalEvaporationManager.getManager(tier);
+        return MoreThermalEvaporationManager.getManager(this.tier);
     }
 
     @Override
@@ -55,10 +55,10 @@ public class TileEntityMoreThermalEvaporationBlock extends TileEntityMultiblock<
     @Override
     protected void presetVariables() {
         super.presetVariables();
-        tier = Attribute.getTier(getBlockType(), MoreThermalEvaporationTier.class);
+        this.tier = Attribute.getTier(getBlockType(), MoreThermalEvaporationTier.class);
     }
 
     public MoreThermalEvaporationTier getTier() {
-        return tier;
+        return this.tier;
     }
 }

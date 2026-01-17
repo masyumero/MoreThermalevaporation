@@ -38,7 +38,7 @@ public class RenderMoreThermalEvaporationPlant extends MultiblockTileEntityRende
 
     @Override
     protected String getProfilerSection() {
-        return tier.getBaseTier().getLowerName() + "ThermalEvaporationController";
+        return this.tier.getBaseTier().getLowerName() + "ThermalEvaporationController";
     }
 
     @Override

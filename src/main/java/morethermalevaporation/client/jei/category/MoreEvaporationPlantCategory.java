@@ -43,9 +43,9 @@ public class MoreEvaporationPlantCategory extends MultiblockCategory<MoreEvapora
     @Override
     protected void getRecipeCatalystItemStacks(Consumer<ItemStack> consumer) {
         super.getRecipeCatalystItemStacks(consumer);
-        consumer.accept(MoreThermalEvaporationBlocks.getBlock(tier).getItemStack());
-        consumer.accept(MoreThermalEvaporationBlocks.getValve(tier).getItemStack());
-        consumer.accept(MoreThermalEvaporationBlocks.getController(tier).getItemStack());
+        consumer.accept(MoreThermalEvaporationBlocks.getBlock(this.tier).getItemStack());
+        consumer.accept(MoreThermalEvaporationBlocks.getValve(this.tier).getItemStack());
+        consumer.accept(MoreThermalEvaporationBlocks.getController(this.tier).getItemStack());
         consumer.accept(MekanismBlocks.STRUCTURAL_GLASS.getItemStack());
 
         if (JEI_MekanismMultiblocks.MekanismGeneratorsLoaded) {

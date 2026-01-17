@@ -60,11 +60,11 @@ public class MoreThermalEvaporationValidator extends CuboidStructureValidator<Mo
     @Override
     protected CasingType getCasingType(BlockState state) {
         Block block = state.getBlock();
-        if (BlockType.is(block, MoreThermalEvaporationBlockTypes.getBlockTypeBlock(tier))) {
+        if (BlockType.is(block, MoreThermalEvaporationBlockTypes.getBlockTypeBlock(this.tier))) {
             return CasingType.FRAME;
-        } else if (BlockType.is(block, MoreThermalEvaporationBlockTypes.getBlockTypeValve(tier))) {
+        } else if (BlockType.is(block, MoreThermalEvaporationBlockTypes.getBlockTypeValve(this.tier))) {
             return CasingType.VALVE;
-        } else if (BlockType.is(block, MoreThermalEvaporationBlockTypes.getBlockTypeController(tier))) {
+        } else if (BlockType.is(block, MoreThermalEvaporationBlockTypes.getBlockTypeController(this.tier))) {
             return CasingType.OTHER;
         }
         return CasingType.INVALID;
@@ -72,7 +72,7 @@ public class MoreThermalEvaporationValidator extends CuboidStructureValidator<Mo
 
     @Override
     public boolean precheck() {
-        VoxelCuboid maxCuboid = new VoxelCuboid(4, tier.getHeight(), 4);
+        VoxelCuboid maxCuboid = new VoxelCuboid(4, this.tier.getHeight(), 4);
         cuboid = StructureHelper.fetchCuboid(structure, MIN_CUBOID, maxCuboid, EnumSet.complementOf(EnumSet.of(CuboidSide.TOP)), 8);
         return cuboid != null;
     }
