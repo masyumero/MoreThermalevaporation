@@ -10,10 +10,10 @@ import javax.annotation.Nullable;
 
 @NothingNullByDefault
 public enum MoreThermalEvaporationTier implements ITier {
-    BASIC(BaseTier.BASIC, 6_000, 18, 128000, 20000),
-    ADVANCED(BaseTier.ADVANCED, 12_000, 18, 256000, 80000),
-    ELITE(BaseTier.ELITE, 24_000, 18, 512000, 640000),
-    ULTIMATE(BaseTier.ULTIMATE, 48_000, 18, 1024000, 10240000),
+    BASIC(BaseTier.BASIC, 6_000, 18, 64000, 20000),
+    ADVANCED(BaseTier.ADVANCED, 12_000, 18, 64000, 80000),
+    ELITE(BaseTier.ELITE, 24_000, 18, 64000, 640000),
+    ULTIMATE(BaseTier.ULTIMATE, 48_000, 18, 64000, 10240000),
     CREATIVE(BaseTier.CREATIVE, Integer.MAX_VALUE, 18, Integer.MAX_VALUE, Integer.MAX_VALUE);
 
     private final BaseTier baseTier;
