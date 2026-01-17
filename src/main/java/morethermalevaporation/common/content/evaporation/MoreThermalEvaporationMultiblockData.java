@@ -81,6 +81,8 @@ public class MoreThermalEvaporationMultiblockData extends MultiblockData impleme
     private final Int2ObjectMap<LazyOptional<IEvaporationSolar>> cachedSolar = new Int2ObjectArrayMap<>(4);
     private final IOutputHandler<@NotNull FluidStack> outputHandler;
     private final IInputHandler<@NotNull FluidStack> inputHandler;
+    private final MoreThermalEvaporationTier tier;
+    private final double maxMultiplierTemp;
     @ContainerSync
     @WrappingComputerMethod(wrapper = ComputerFluidTankWrapper.class, methodNames = {"getInput", "getInputCapacity", "getInputNeeded", "getInputFilledPercentage"}, docPlaceholder = "input tank")
     public BasicFluidTank inputTank;
@@ -96,9 +98,7 @@ public class MoreThermalEvaporationMultiblockData extends MultiblockData impleme
     @ContainerSync
     @SyntheticComputerMethod(getter = "getEnvironmentalLoss")
     public double lastEnvironmentLoss;
-    private MoreThermalEvaporationTier tier;
     private double biomeAmbientTemp;
-    private double maxMultiplierTemp;
     private double tempMultiplier;
     private int inputTankCapacity;
 
@@ -107,10 +107,10 @@ public class MoreThermalEvaporationMultiblockData extends MultiblockData impleme
         this.tier = tier;
         recipeCacheLookupMonitor = new RecipeCacheLookupMonitor<>(this);
         recheckAllRecipeErrors = TileEntityRecipeMachine.shouldRecheckAllErrors(tile);
-        maxMultiplierTemp = tier.getMultiplierTemp();
+        maxMultiplierTemp = this.tier.getMultiplierTemp();
         biomeAmbientTemp = HeatAPI.getAmbientTemp(tile.getLevel(), tile.getTilePos());
         fluidTanks.add(inputTank = VariableCapacityFluidTank.input(this, this::getMaxFluid, this::containsRecipe, createSaveAndComparator(recipeCacheLookupMonitor)));
-        fluidTanks.add(outputTank = VariableCapacityFluidTank.output(this, tier::getOutputTankCapacity, BasicFluidTank.alwaysTrue, this));
+        fluidTanks.add(outputTank = VariableCapacityFluidTank.output(this, this.tier::getOutputTankCapacity, BasicFluidTank.alwaysTrue, this));
         inputHandler = InputHelper.getInputHandler(inputTank, RecipeError.NOT_ENOUGH_INPUT);
         outputHandler = OutputHelper.getOutputHandler(outputTank, RecipeError.NOT_ENOUGH_OUTPUT_SPACE);
         inventorySlots.add(inputInputSlot = FluidInventorySlot.fill(inputTank, this, 28, 20));
@@ -197,7 +197,9 @@ public class MoreThermalEvaporationMultiblockData extends MultiblockData impleme
         if (getVolume() != volume) {
             super.setVolume(volume);
             //Note: We only count the inner volume for the tank capacity for the evap tower
-            inputTankCapacity = (volume / 4) * tier.getInputTankCapacity();
+            inputTankCapacity = this.tier == MoreThermalEvaporationTier.CREATIVE
+                    ? Integer.MAX_VALUE
+                    : (volume / 4) * this.tier.getInputTankCapacity();
         }
     }
 
