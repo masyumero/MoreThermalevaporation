@@ -1,9 +1,13 @@
 package morethermalevaporation;
 
 import mekanism.common.command.builders.BuildCommand;
+import mekanism.common.lib.multiblock.MultiblockCache;
+import mekanism.common.lib.multiblock.MultiblockManager;
 import morethermalevaporation.common.MoreThermalEvaporationLang;
 import morethermalevaporation.common.command.builders.MoreThermalEvaporationBuilders.MoreEvaporationBuilder;
 import morethermalevaporation.common.config.MoreThermalEvaporationConfig;
+import morethermalevaporation.common.content.evaporation.MoreThermalEvaporationMultiblockData;
+import morethermalevaporation.common.content.evaporation.MoreThermalEvaporationValidator;
 import morethermalevaporation.common.registries.MoreThermalEvaporationBlocks;
 import morethermalevaporation.common.registries.MoreThermalEvaporationContainerTypes;
 import morethermalevaporation.common.registries.MoreThermalEvaporationCreativeTabs;
@@ -19,11 +23,21 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import java.util.EnumMap;
+
 @Mod(MoreThermalEvaporation.MODID)
 public class MoreThermalEvaporation {
 
     public static final String MODID = "morethermalevaporation";
     public static boolean JustEnoughMekanismMultiblocksLoaded = false;
+
+    public static final EnumMap<MoreThermalEvaporationTier, MultiblockManager<MoreThermalEvaporationMultiblockData>> MoreThermalEvaporationManagers = new EnumMap<>(MoreThermalEvaporationTier.class);
+
+    static {
+        for (MoreThermalEvaporationTier tier:MoreThermalEvaporationTier.values()){
+            MoreThermalEvaporationManagers.put(tier,new MultiblockManager<>(tier.getBaseTier().getSimpleName() + "ThermalEvaporation", MultiblockCache::new,() -> new MoreThermalEvaporationValidator(tier)));
+        }
+    }
 
     public MoreThermalEvaporation() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
