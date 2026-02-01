@@ -9,164 +9,54 @@ import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvapor
 import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationController;
 import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationValve;
 
+import java.util.EnumMap;
+
 public class MoreThermalEvaporationTileEntityTypes {
     public static final TileEntityTypeDeferredRegister TILE_ENTITY_TYPES = new TileEntityTypeDeferredRegister(MoreThermalEvaporation.MODID);
 
-    // Basic
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationBlock> BASIC_THERMAL_EVAPORATION_BLOCK =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getBlock(MoreThermalEvaporationTier.BASIC),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationBlock(MoreThermalEvaporationTier.BASIC, pos, state),
+    private static final EnumMap<MoreThermalEvaporationTier, TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationBlock>> BLOCKS = new EnumMap<>(MoreThermalEvaporationTier.class);
+    private static final EnumMap<MoreThermalEvaporationTier, TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationValve>> VALVES = new EnumMap<>(MoreThermalEvaporationTier.class);
+    private static final EnumMap<MoreThermalEvaporationTier, TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationController>> CONTROLLERS = new EnumMap<>(MoreThermalEvaporationTier.class);
+
+    static {
+        for (MoreThermalEvaporationTier tier : MoreThermalEvaporationTier.values()) {
+            BLOCKS.put(tier, TILE_ENTITY_TYPES.register(
+                    MoreThermalEvaporationBlocks.BLOCKS.get(tier),
+                    (pos, state) -> new TileEntityMoreThermalEvaporationBlock(tier, pos, state),
                     TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
+                    TileEntityMekanism::tickClient)
             );
 
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationValve> BASIC_THERMAL_EVAPORATION_VALVE =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getValve(MoreThermalEvaporationTier.BASIC),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationValve(MoreThermalEvaporationTier.BASIC, pos, state),
+            VALVES.put(tier, TILE_ENTITY_TYPES.register(
+                    MoreThermalEvaporationBlocks.VALVES.get(tier),
+                    (pos, state) -> new TileEntityMoreThermalEvaporationValve(tier, pos, state),
                     TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
+                    TileEntityMekanism::tickClient)
             );
 
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationController> BASIC_THERMAL_EVAPORATION_CONTROLLER =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getController(MoreThermalEvaporationTier.BASIC),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationController(MoreThermalEvaporationTier.BASIC, pos, state),
+            CONTROLLERS.put(tier, TILE_ENTITY_TYPES.register(
+                    MoreThermalEvaporationBlocks.CONTROLLERS.get(tier),
+                    (pos, state) -> new TileEntityMoreThermalEvaporationController(tier, pos, state),
                     TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
+                    TileEntityMekanism::tickClient)
             );
+        }
+    }
 
-    // Advanced
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationBlock> ADVANCED_THERMAL_EVAPORATION_BLOCK =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getBlock(MoreThermalEvaporationTier.ADVANCED),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationBlock(MoreThermalEvaporationTier.ADVANCED, pos, state),
-                    TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
-            );
-
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationValve> ADVANCED_THERMAL_EVAPORATION_VALVE =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getValve(MoreThermalEvaporationTier.ADVANCED),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationValve(MoreThermalEvaporationTier.ADVANCED, pos, state),
-                    TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
-            );
-
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationController> ADVANCED_THERMAL_EVAPORATION_CONTROLLER =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getController(MoreThermalEvaporationTier.ADVANCED),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationController(MoreThermalEvaporationTier.ADVANCED, pos, state),
-                    TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
-            );
-
-    // Elite
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationBlock> ELITE_THERMAL_EVAPORATION_BLOCK =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getBlock(MoreThermalEvaporationTier.ELITE),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationBlock(MoreThermalEvaporationTier.ELITE, pos, state),
-                    TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
-            );
-
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationValve> ELITE_THERMAL_EVAPORATION_VALVE =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getValve(MoreThermalEvaporationTier.ELITE),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationValve(MoreThermalEvaporationTier.ELITE, pos, state),
-                    TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
-            );
-
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationController> ELITE_THERMAL_EVAPORATION_CONTROLLER =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getController(MoreThermalEvaporationTier.ELITE),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationController(MoreThermalEvaporationTier.ELITE, pos, state),
-                    TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
-            );
-
-    // Ultimate
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationBlock> ULTIMATE_THERMAL_EVAPORATION_BLOCK =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getBlock(MoreThermalEvaporationTier.ULTIMATE),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationBlock(MoreThermalEvaporationTier.ULTIMATE, pos, state),
-                    TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
-            );
-
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationValve> ULTIMATE_THERMAL_EVAPORATION_VALVE =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getValve(MoreThermalEvaporationTier.ULTIMATE),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationValve(MoreThermalEvaporationTier.ULTIMATE, pos, state),
-                    TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
-            );
-
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationController> ULTIMATE_THERMAL_EVAPORATION_CONTROLLER =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getController(MoreThermalEvaporationTier.ULTIMATE),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationController(MoreThermalEvaporationTier.ULTIMATE, pos, state),
-                    TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
-            );
-
-    // Creative
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationBlock> CREATIVE_THERMAL_EVAPORATION_BLOCK =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getBlock(MoreThermalEvaporationTier.CREATIVE),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationBlock(MoreThermalEvaporationTier.CREATIVE, pos, state),
-                    TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
-            );
-
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationValve> CREATIVE_THERMAL_EVAPORATION_VALVE =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getValve(MoreThermalEvaporationTier.CREATIVE),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationValve(MoreThermalEvaporationTier.CREATIVE, pos, state),
-                    TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
-            );
-
-    public static final TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationController> CREATIVE_THERMAL_EVAPORATION_CONTROLLER =
-            TILE_ENTITY_TYPES.register(
-                    MoreThermalEvaporationBlocks.getController(MoreThermalEvaporationTier.CREATIVE),
-                    (pos, state) -> new TileEntityMoreThermalEvaporationController(MoreThermalEvaporationTier.CREATIVE, pos, state),
-                    TileEntityMekanism::tickServer,
-                    TileEntityMekanism::tickClient
-            );
+    private MoreThermalEvaporationTileEntityTypes() {
+    }
 
     public static TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationBlock> getTileEntityTypeBlock(MoreThermalEvaporationTier tier) {
-        return switch (tier) {
-            case BASIC -> BASIC_THERMAL_EVAPORATION_BLOCK;
-            case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_BLOCK;
-            case ELITE -> ELITE_THERMAL_EVAPORATION_BLOCK;
-            case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_BLOCK;
-            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_BLOCK;
-        };
+        return BLOCKS.get(tier);
     }
 
     public static TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationValve> getTileEntityTypeValve(MoreThermalEvaporationTier tier) {
-        return switch (tier) {
-            case BASIC -> BASIC_THERMAL_EVAPORATION_VALVE;
-            case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_VALVE;
-            case ELITE -> ELITE_THERMAL_EVAPORATION_VALVE;
-            case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_VALVE;
-            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_VALVE;
-        };
+        return VALVES.get(tier);
     }
 
     public static TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationController> getTileEntityTypeController(MoreThermalEvaporationTier tier) {
-        return switch (tier) {
-            case BASIC -> BASIC_THERMAL_EVAPORATION_CONTROLLER;
-            case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_CONTROLLER;
-            case ELITE -> ELITE_THERMAL_EVAPORATION_CONTROLLER;
-            case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_CONTROLLER;
-            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_CONTROLLER;
-        };
+        return CONTROLLERS.get(tier);
     }
-
 
 }
 

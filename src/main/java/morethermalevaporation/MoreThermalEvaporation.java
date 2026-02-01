@@ -34,15 +34,15 @@ public class MoreThermalEvaporation {
     public static final EnumMap<MoreThermalEvaporationTier, MultiblockManager<MoreThermalEvaporationMultiblockData>> MoreThermalEvaporationManagers = new EnumMap<>(MoreThermalEvaporationTier.class);
 
     static {
-        for (MoreThermalEvaporationTier tier:MoreThermalEvaporationTier.values()){
-            MoreThermalEvaporationManagers.put(tier,new MultiblockManager<>(tier.getBaseTier().getSimpleName() + "ThermalEvaporation", MultiblockCache::new,() -> new MoreThermalEvaporationValidator(tier)));
+        for (MoreThermalEvaporationTier tier : MoreThermalEvaporationTier.values()) {
+            MoreThermalEvaporationManagers.put(tier, new MultiblockManager<>(tier.getBaseTier().getSimpleName() + "ThermalEvaporation", MultiblockCache::new, () -> new MoreThermalEvaporationValidator(tier)));
         }
     }
 
     public MoreThermalEvaporation() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        MoreThermalEvaporationBlocks.BLOCKS.register(modEventBus);
+        MoreThermalEvaporationBlocks.REGISTRY_BLOCKS.register(modEventBus);
         MoreThermalEvaporationTileEntityTypes.TILE_ENTITY_TYPES.register(modEventBus);
         MoreThermalEvaporationContainerTypes.CONTAINER_TYPES.register(modEventBus);
         MoreThermalEvaporationCreativeTabs.register(modEventBus);

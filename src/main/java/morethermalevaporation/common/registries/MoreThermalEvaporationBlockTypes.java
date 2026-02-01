@@ -13,99 +13,22 @@ import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvapor
 import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationController;
 import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationValve;
 
+import java.util.EnumMap;
 import java.util.EnumSet;
 
 public class MoreThermalEvaporationBlockTypes {
-    // Basic
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationBlock> BASIC_THERMAL_EVAPORATION_BLOCK =
-            createMoreThermalEvaporationBlock(
-                    MoreThermalEvaporationTier.BASIC,
-                    MoreThermalEvaporationLang.DESCRIPTION_BASIC_THERMAL_EVAPORATION_BLOCK
-            );
 
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationValve> BASIC_THERMAL_EVAPORATION_VALVE =
-            createMoreThermalEvaporationValve(
-                    MoreThermalEvaporationTier.BASIC,
-                    MoreThermalEvaporationLang.DESCRIPTION_BASIC_THERMAL_EVAPORATION_VALVE
-            );
+    private static final EnumMap<MoreThermalEvaporationTier, BlockTypeTile<TileEntityMoreThermalEvaporationBlock>> BLOCKS = new EnumMap<>(MoreThermalEvaporationTier.class);
+    private static final EnumMap<MoreThermalEvaporationTier, BlockTypeTile<TileEntityMoreThermalEvaporationValve>> VALVES = new EnumMap<>(MoreThermalEvaporationTier.class);
+    private static final EnumMap<MoreThermalEvaporationTier, BlockTypeTile<TileEntityMoreThermalEvaporationController>> CONTROLLERS = new EnumMap<>(MoreThermalEvaporationTier.class);
 
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationController> BASIC_THERMAL_EVAPORATION_CONTROLLER =
-            createMoreThermalEvaporationController(
-                    MoreThermalEvaporationTier.BASIC,
-                    MoreThermalEvaporationLang.DESCRIPTION_BASIC_THERMAL_EVAPORATION_CONTROLLER
-            );
-
-    // Advanced
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationBlock> ADVANCED_THERMAL_EVAPORATION_BLOCK =
-            createMoreThermalEvaporationBlock(
-                    MoreThermalEvaporationTier.ADVANCED,
-                    MoreThermalEvaporationLang.DESCRIPTION_ADVANCED_THERMAL_EVAPORATION_BLOCK
-            );
-
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationValve> ADVANCED_THERMAL_EVAPORATION_VALVE =
-            createMoreThermalEvaporationValve(
-                    MoreThermalEvaporationTier.ADVANCED,
-                    MoreThermalEvaporationLang.DESCRIPTION_ADVANCED_THERMAL_EVAPORATION_VALVE
-            );
-
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationController> ADVANCED_THERMAL_EVAPORATION_CONTROLLER =
-            createMoreThermalEvaporationController(
-                    MoreThermalEvaporationTier.ADVANCED,
-                    MoreThermalEvaporationLang.DESCRIPTION_ADVANCED_THERMAL_EVAPORATION_CONTROLLER
-            );
-
-    // Elite
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationBlock> ELITE_THERMAL_EVAPORATION_BLOCK =
-            createMoreThermalEvaporationBlock(
-                    MoreThermalEvaporationTier.ELITE,
-                    MoreThermalEvaporationLang.DESCRIPTION_ELITE_THERMAL_EVAPORATION_BLOCK
-            );
-
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationValve> ELITE_THERMAL_EVAPORATION_VALVE =
-            createMoreThermalEvaporationValve(
-                    MoreThermalEvaporationTier.ELITE,
-                    MoreThermalEvaporationLang.DESCRIPTION_ELITE_THERMAL_EVAPORATION_VALVE
-            );
-
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationController> ELITE_THERMAL_EVAPORATION_CONTROLLER =
-            createMoreThermalEvaporationController(
-                    MoreThermalEvaporationTier.ELITE,
-                    MoreThermalEvaporationLang.DESCRIPTION_ELITE_THERMAL_EVAPORATION_CONTROLLER
-            );
-
-    // Ultimate
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationBlock> ULTIMATE_THERMAL_EVAPORATION_BLOCK =
-            createMoreThermalEvaporationBlock(
-                    MoreThermalEvaporationTier.ULTIMATE, MoreThermalEvaporationLang.DESCRIPTION_ULTIMATE_THERMAL_EVAPORATION_BLOCK);
-
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationValve> ULTIMATE_THERMAL_EVAPORATION_VALVE =
-            createMoreThermalEvaporationValve(
-                    MoreThermalEvaporationTier.ULTIMATE,
-                    MoreThermalEvaporationLang.DESCRIPTION_ULTIMATE_THERMAL_EVAPORATION_VALVE
-            );
-
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationController> ULTIMATE_THERMAL_EVAPORATION_CONTROLLER =
-            createMoreThermalEvaporationController(
-                    MoreThermalEvaporationTier.ULTIMATE,
-                    MoreThermalEvaporationLang.DESCRIPTION_ULTIMATE_THERMAL_EVAPORATION_CONTROLLER
-            );
-
-    // Creative
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationBlock> CREATIVE_THERMAL_EVAPORATION_BLOCK =
-            createMoreThermalEvaporationBlock(
-                    MoreThermalEvaporationTier.CREATIVE, MoreThermalEvaporationLang.DESCRIPTION_CREATIVE_THERMAL_EVAPORATION_BLOCK);
-
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationValve> CREATIVE_THERMAL_EVAPORATION_VALVE =
-            createMoreThermalEvaporationValve(
-                    MoreThermalEvaporationTier.CREATIVE,
-                    MoreThermalEvaporationLang.DESCRIPTION_CREATIVE_THERMAL_EVAPORATION_VALVE
-            );
-
-    public static final BlockTypeTile<TileEntityMoreThermalEvaporationController> CREATIVE_THERMAL_EVAPORATION_CONTROLLER =
-            createMoreThermalEvaporationController(
-                    MoreThermalEvaporationTier.CREATIVE,
-                    MoreThermalEvaporationLang.DESCRIPTION_CREATIVE_THERMAL_EVAPORATION_CONTROLLER
-            );
+    static {
+        for (MoreThermalEvaporationTier tier : MoreThermalEvaporationTier.values()) {
+            BLOCKS.put(tier, createMoreThermalEvaporationBlock(tier, MoreThermalEvaporationLang.getLangBlock(tier)));
+            VALVES.put(tier, createMoreThermalEvaporationValve(tier, MoreThermalEvaporationLang.getLangValve(tier)));
+            CONTROLLERS.put(tier, createMoreThermalEvaporationController(tier, MoreThermalEvaporationLang.getLangController(tier)));
+        }
+    }
 
     private MoreThermalEvaporationBlockTypes() {
     }
@@ -136,32 +59,14 @@ public class MoreThermalEvaporationBlockTypes {
     }
 
     public static BlockTypeTile<TileEntityMoreThermalEvaporationBlock> getBlockTypeBlock(MoreThermalEvaporationTier tier) {
-        return switch (tier) {
-            case BASIC -> BASIC_THERMAL_EVAPORATION_BLOCK;
-            case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_BLOCK;
-            case ELITE -> ELITE_THERMAL_EVAPORATION_BLOCK;
-            case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_BLOCK;
-            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_BLOCK;
-        };
+        return BLOCKS.get(tier);
     }
 
     public static BlockTypeTile<TileEntityMoreThermalEvaporationValve> getBlockTypeValve(MoreThermalEvaporationTier tier) {
-        return switch (tier) {
-            case BASIC -> BASIC_THERMAL_EVAPORATION_VALVE;
-            case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_VALVE;
-            case ELITE -> ELITE_THERMAL_EVAPORATION_VALVE;
-            case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_VALVE;
-            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_VALVE;
-        };
+        return VALVES.get(tier);
     }
 
     public static BlockTypeTile<TileEntityMoreThermalEvaporationController> getBlockTypeController(MoreThermalEvaporationTier tier) {
-        return switch (tier) {
-            case BASIC -> BASIC_THERMAL_EVAPORATION_CONTROLLER;
-            case ADVANCED -> ADVANCED_THERMAL_EVAPORATION_CONTROLLER;
-            case ELITE -> ELITE_THERMAL_EVAPORATION_CONTROLLER;
-            case ULTIMATE -> ULTIMATE_THERMAL_EVAPORATION_CONTROLLER;
-            case CREATIVE -> CREATIVE_THERMAL_EVAPORATION_CONTROLLER;
-        };
+        return CONTROLLERS.get(tier);
     }
 }

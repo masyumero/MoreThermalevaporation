@@ -1,6 +1,7 @@
 package morethermalevaporation.common.registries;
 
 import morethermalevaporation.MoreThermalEvaporation;
+import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -17,23 +18,13 @@ public class MoreThermalEvaporationCreativeTabs {
     public static final RegistryObject<CreativeModeTab> TAB_MORE_THERMAL_EVAPORATION = CREATIVE_TABS.register("tab_more_thermal_evaporation", () ->
             CreativeModeTab.builder()
                     .title(Component.translatable("creativetab.morethermalevaporation.tab"))
-                    .icon(() -> new ItemStack(MoreThermalEvaporationBlocks.BASIC_THERMAL_EVAPORATION_BLOCK.asItem()))
+                    .icon(() -> new ItemStack(MoreThermalEvaporationBlocks.getBlock(MoreThermalEvaporationTier.BASIC).asItem()))
                     .displayItems((parameters, output) -> {
-                        output.accept(MoreThermalEvaporationBlocks.BASIC_THERMAL_EVAPORATION_BLOCK.getBlock());
-                        output.accept(MoreThermalEvaporationBlocks.BASIC_THERMAL_EVAPORATION_VALVE.getBlock());
-                        output.accept(MoreThermalEvaporationBlocks.BASIC_THERMAL_EVAPORATION_CONTROLLER.getBlock());
-                        output.accept(MoreThermalEvaporationBlocks.ADVANCED_THERMAL_EVAPORATION_BLOCK.getBlock());
-                        output.accept(MoreThermalEvaporationBlocks.ADVANCED_THERMAL_EVAPORATION_VALVE.getBlock());
-                        output.accept(MoreThermalEvaporationBlocks.ADVANCED_THERMAL_EVAPORATION_CONTROLLER.getBlock());
-                        output.accept(MoreThermalEvaporationBlocks.ELITE_THERMAL_EVAPORATION_BLOCK.getBlock());
-                        output.accept(MoreThermalEvaporationBlocks.ELITE_THERMAL_EVAPORATION_VALVE.getBlock());
-                        output.accept(MoreThermalEvaporationBlocks.ELITE_THERMAL_EVAPORATION_CONTROLLER.getBlock());
-                        output.accept(MoreThermalEvaporationBlocks.ULTIMATE_THERMAL_EVAPORATION_BLOCK.getBlock());
-                        output.accept(MoreThermalEvaporationBlocks.ULTIMATE_THERMAL_EVAPORATION_VALVE.getBlock());
-                        output.accept(MoreThermalEvaporationBlocks.ULTIMATE_THERMAL_EVAPORATION_CONTROLLER.getBlock());
-                        output.accept(MoreThermalEvaporationBlocks.CREATIVE_THERMAL_EVAPORATION_BLOCK.getBlock());
-                        output.accept(MoreThermalEvaporationBlocks.CREATIVE_THERMAL_EVAPORATION_VALVE.getBlock());
-                        output.accept(MoreThermalEvaporationBlocks.CREATIVE_THERMAL_EVAPORATION_CONTROLLER.getBlock());
+                        for (MoreThermalEvaporationTier tier : MoreThermalEvaporationTier.values()) {
+                            output.accept(MoreThermalEvaporationBlocks.getBlock(tier));
+                            output.accept(MoreThermalEvaporationBlocks.getValve(tier));
+                            output.accept(MoreThermalEvaporationBlocks.getController(tier));
+                        }
                     })
                     .build()
     );
