@@ -45,5 +45,11 @@
   "evaporation.morethermalevaporation.ultimate_evaporation_plant" : "궁극 열 증발 설비",
   "evaporation.morethermalevaporation.creative_evaporation_plant" : "크리에이티브 열 증발 설비",
 
+  "mbtool.structure.morethermalevaporation_basic_evaporation_tower": "MTE 기본 열 증발 설비",
+  "mbtool.structure.morethermalevaporation_advanced_evaporation_tower": "MTE 고급 열 증발 설비",
+  "mbtool.structure.morethermalevaporation_elite_evaporation_tower": "MTE 엘리트 열 증발 설비",
+  "mbtool.structure.morethermalevaporation_ultimate_evaporation_tower": "MTE 궁극 열 증발 설비",
+  "mbtool.structure.morethermalevaporation_creative_evaporation_tower": "MTE 크리에이티브 열 증발 설비",
+
   "creativetab.morethermalevaporation.tab": "More Thermal Evaporation"
 }

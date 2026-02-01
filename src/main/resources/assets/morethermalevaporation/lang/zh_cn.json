@@ -15,6 +15,10 @@
   "block.morethermalevaporation.ultimate_thermal_evaporation_controller": "终极热力蒸馏控制器",
   "block.morethermalevaporation.ultimate_thermal_evaporation_valve": "终极热力蒸馏阀门",
 
+  "block.morethermalevaporation.creative_thermal_evaporation_block": "创造热力蒸馏方块",
+  "block.morethermalevaporation.creative_thermal_evaporation_controller": "创造热力蒸馏控制器",
+  "block.morethermalevaporation.creative_thermal_evaporation_valve": "创造热力蒸馏阀门",
+
   "description.morethermalevaporation.basic_thermal_evaporation_block": "用于基础热力蒸馏塔结构的铜合金外壳，使用先进材料传导工作时所需的大量热量。",
   "description.morethermalevaporation.basic_thermal_evaporation_controller": "基础热力蒸馏塔的控制器，多方块结构的核心。 在多方块结构中只能有一个。",
   "description.morethermalevaporation.basic_thermal_evaporation_valve": "用于基础热力蒸馏塔的阀门，允许通过外部管道输入和输出流体。",
@@ -31,10 +35,21 @@
   "description.morethermalevaporation.ultimate_thermal_evaporation_controller": "终极热力蒸馏塔的控制器，多方块结构的核心。 在多方块结构中只能有一个。",
   "description.morethermalevaporation.ultimate_thermal_evaporation_valve": "用于终极热力蒸馏塔的阀门，允许通过外部管道输入和输出流体。",
 
-  "basic_evaporation.morethermalevaporation.basic_evaporation_plant" : "基础热力蒸馏塔",
-  "advanced_evaporation.morethermalevaporation.advanced_evaporation_plant" : "高级热力蒸馏塔",
-  "elite_evaporation.morethermalevaporation.elite_evaporation_plant" : "精英热力蒸馏塔",
-  "ultimate_evaporation.morethermalevaporation.ultimate_evaporation_plant" : "终极热力蒸馏塔",
+  "description.morethermalevaporation.creative_thermal_evaporation_block": "用于创造热力蒸馏塔结构的铜合金外壳，使用先进材料传导工作时所需的大量热量。",
+  "description.morethermalevaporation.creative_thermal_evaporation_controller": "创造热力蒸馏塔的控制器，多方块结构的核心。 在多方块结构中只能有一个。",
+  "description.morethermalevaporation.creative_thermal_evaporation_valve": "用于创造热力蒸馏塔的阀门，允许通过外部管道输入和输出流体。",
+
+  "evaporation.morethermalevaporation.basic_evaporation_plant" :"基础热力蒸馏塔",
+  "evaporation.morethermalevaporation.advanced_evaporation_plant" : "高级热力蒸馏塔",
+  "evaporation.morethermalevaporation.elite_evaporation_plant" : "精英热力蒸馏塔",
+  "evaporation.morethermalevaporation.ultimate_evaporation_plant" : "终极热力蒸馏塔",
+  "evaporation.morethermalevaporation.creative_evaporation_plant" : "创造热力蒸馏塔",
+
+  "mbtool.structure.morethermalevaporation_basic_evaporation_tower": "MTE 基础热力蒸馏塔",
+  "mbtool.structure.morethermalevaporation_advanced_evaporation_tower": "MTE 高级热力蒸馏塔",
+  "mbtool.structure.morethermalevaporation_elite_evaporation_tower": "MTE 精英热力蒸馏塔",
+  "mbtool.structure.morethermalevaporation_ultimate_evaporation_tower": "MTE 终极热力蒸馏塔",
+  "mbtool.structure.morethermalevaporation_creative_evaporation_tower": "MTE 创造热力蒸馏塔",
 
   "creativetab.morethermalevaporation.tab": "更多热力蒸馏"
 }
