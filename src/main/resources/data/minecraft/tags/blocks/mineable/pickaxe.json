@@ -18,6 +18,12 @@
 
     "morethermalevaporation:creative_thermal_evaporation_block",
     "morethermalevaporation:creative_thermal_evaporation_controller",
-    "morethermalevaporation:creative_thermal_evaporation_valve"
+    "morethermalevaporation:creative_thermal_evaporation_valve",
+
+    "morethermalevaporation:basic_thermal_evaporation_compact",
+    "morethermalevaporation:advanced_thermal_evaporation_compact",
+    "morethermalevaporation:elite_thermal_evaporation_compact",
+    "morethermalevaporation:ultimate_thermal_evaporation_compact",
+    "morethermalevaporation:creative_thermal_evaporation_compact"
   ]
 }
