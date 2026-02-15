@@ -60,11 +60,11 @@ public class MoreThermalEvaporationValidator extends CuboidStructureValidator<Mo
     @Override
     protected CasingType getCasingType(BlockState state) {
         Block block = state.getBlock();
-        if (BlockType.is(block, MoreThermalEvaporationBlockTypes.getBlockTypeBlock(this.tier))) {
+        if (BlockType.is(block, MoreThermalEvaporationBlockTypes.BLOCKS.get(this.tier))) {
             return CasingType.FRAME;
-        } else if (BlockType.is(block, MoreThermalEvaporationBlockTypes.getBlockTypeValve(this.tier))) {
+        } else if (BlockType.is(block, MoreThermalEvaporationBlockTypes.VALVES.get(this.tier))) {
             return CasingType.VALVE;
-        } else if (BlockType.is(block, MoreThermalEvaporationBlockTypes.getBlockTypeController(this.tier))) {
+        } else if (BlockType.is(block, MoreThermalEvaporationBlockTypes.CONTROLLERS.get(this.tier))) {
             return CasingType.OTHER;
         }
         return CasingType.INVALID;

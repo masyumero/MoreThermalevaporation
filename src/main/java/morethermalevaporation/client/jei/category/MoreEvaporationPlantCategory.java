@@ -36,16 +36,16 @@ public class MoreEvaporationPlantCategory extends MultiblockCategory<MoreEvapora
 
     public MoreEvaporationPlantCategory(IGuiHelper helper, MoreThermalEvaporationTier tier, Class<? extends MoreEvaporationPlantWidget> widgetClass) {
         // TODO JEI表示順の為にティア順をパスに追加
-        super(helper, MoreThermalEvaporation.rl(tier.ordinal() + "_" + tier.getBaseTier().getLowerName() + "_evaporation_plant"), widgetClass, MoreThermalEvaporationLang.getLangPlant(tier).translate(), MoreThermalEvaporationBlocks.getController(tier).getItemStack());
+        super(helper, MoreThermalEvaporation.rl(tier.ordinal() + "_" + tier.getBaseTier().getLowerName() + "_evaporation_plant"), widgetClass, MoreThermalEvaporationLang.getLangPlant(tier).translate(), MoreThermalEvaporationBlocks.CONTROLLERS.get(tier).getItemStack());
         this.tier = tier;
     }
 
     @Override
     protected void getRecipeCatalystItemStacks(Consumer<ItemStack> consumer) {
         super.getRecipeCatalystItemStacks(consumer);
-        consumer.accept(MoreThermalEvaporationBlocks.getBlock(this.tier).getItemStack());
-        consumer.accept(MoreThermalEvaporationBlocks.getValve(this.tier).getItemStack());
-        consumer.accept(MoreThermalEvaporationBlocks.getController(this.tier).getItemStack());
+        consumer.accept(MoreThermalEvaporationBlocks.BLOCKS.get(this.tier).getItemStack());
+        consumer.accept(MoreThermalEvaporationBlocks.VALVES.get(this.tier).getItemStack());
+        consumer.accept(MoreThermalEvaporationBlocks.CONTROLLERS.get(this.tier).getItemStack());
         consumer.accept(MekanismBlocks.STRUCTURAL_GLASS.getItemStack());
 
         if (JEI_MekanismMultiblocks.MekanismGeneratorsLoaded) {
@@ -174,9 +174,9 @@ public class MoreEvaporationPlantCategory extends MultiblockCategory<MoreEvapora
 
             }
 
-            consumer.accept(new ItemStack(MoreThermalEvaporationBlocks.getController(tier), 1));
-            consumer.accept(new ItemStack(MoreThermalEvaporationBlocks.getValve(tier), valves));
-            consumer.accept(new ItemStack(MoreThermalEvaporationBlocks.getBlock(tier), casing));
+            consumer.accept(new ItemStack(MoreThermalEvaporationBlocks.CONTROLLERS.get(tier), 1));
+            consumer.accept(new ItemStack(MoreThermalEvaporationBlocks.VALVES.get(tier), valves));
+            consumer.accept(new ItemStack(MoreThermalEvaporationBlocks.BLOCKS.get(tier), casing));
             consumer.accept(new ItemStack(this.getGlassBlock(), glasses));
 
             if (JEI_MekanismMultiblocks.MekanismGeneratorsLoaded) {

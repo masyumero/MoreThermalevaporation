@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class TileEntityMoreThermalEvaporationValve extends TileEntityMoreThermalEvaporationBlock {
 
     public TileEntityMoreThermalEvaporationValve(MoreThermalEvaporationTier tier, BlockPos pos, BlockState state) {
-        super(MoreThermalEvaporationBlocks.getValve(tier), pos, state);
+        super(MoreThermalEvaporationBlocks.VALVES.get(tier), pos, state);
     }
 
     @NotNull

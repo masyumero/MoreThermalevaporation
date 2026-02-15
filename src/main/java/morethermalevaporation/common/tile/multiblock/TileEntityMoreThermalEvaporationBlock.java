@@ -19,7 +19,7 @@ public class TileEntityMoreThermalEvaporationBlock extends TileEntityMultiblock<
     public MoreThermalEvaporationTier tier;
 
     public TileEntityMoreThermalEvaporationBlock(MoreThermalEvaporationTier tier, BlockPos pos, BlockState state) {
-        this(MoreThermalEvaporationBlocks.getBlock(tier), pos, state);
+        this(MoreThermalEvaporationBlocks.BLOCKS.get(tier), pos, state);
     }
 
     public TileEntityMoreThermalEvaporationBlock(IBlockProvider provider, BlockPos pos, BlockState state) {

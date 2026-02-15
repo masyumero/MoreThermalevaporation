@@ -26,12 +26,12 @@ public class MoreThermalEvaporationBuilders {
             buildFrame(world, start);
             buildWalls(world, start);
             buildInteriorLayers(world, start, 1, this.tier.getHeight() - 1, Blocks.AIR);
-            world.setBlockAndUpdate(start.offset(1, 1, 0), MoreThermalEvaporationBlocks.getController(this.tier).getBlock().defaultBlockState());
+            world.setBlockAndUpdate(start.offset(1, 1, 0), MoreThermalEvaporationBlocks.CONTROLLERS.get(this.tier).getBlock().defaultBlockState());
         }
 
         @Override
         protected Block getCasing() {
-            return MoreThermalEvaporationBlocks.getBlock(this.tier).getBlock();
+            return MoreThermalEvaporationBlocks.BLOCKS.get(this.tier).getBlock();
         }
     }
 

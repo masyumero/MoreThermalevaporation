@@ -26,8 +26,8 @@ public class MoreThermalEvaporationJEI implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
         for (MoreThermalEvaporationTier tier : MoreThermalEvaporationTier.values()) {
-            CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.EVAPORATING, MoreThermalEvaporationBlocks.getController(tier),
-                    MoreThermalEvaporationBlocks.getValve(tier), MoreThermalEvaporationBlocks.getBlock(tier));
+            CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.EVAPORATING, MoreThermalEvaporationBlocks.CONTROLLERS.get(tier),
+                    MoreThermalEvaporationBlocks.VALVES.get(tier), MoreThermalEvaporationBlocks.BLOCKS.get(tier));
         }
 
         // ↓↓↓ Just Enough Mekanism Multiblocks連携

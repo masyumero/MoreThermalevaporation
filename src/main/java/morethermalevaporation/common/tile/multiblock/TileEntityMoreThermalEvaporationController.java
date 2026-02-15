@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class TileEntityMoreThermalEvaporationController extends TileEntityMoreThermalEvaporationBlock {
 
     public TileEntityMoreThermalEvaporationController(MoreThermalEvaporationTier tier, BlockPos pos, BlockState state) {
-        super(MoreThermalEvaporationBlocks.getController(tier), pos, state);
+        super(MoreThermalEvaporationBlocks.CONTROLLERS.get(tier), pos, state);
         delaySupplier = NO_DELAY;
     }
 
