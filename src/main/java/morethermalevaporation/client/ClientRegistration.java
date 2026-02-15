@@ -2,6 +2,7 @@ package morethermalevaporation.client;
 
 import mekanism.client.ClientRegistrationUtil;
 import morethermalevaporation.MoreThermalEvaporation;
+import morethermalevaporation.client.gui.GuiMoreThermalEvaporationCompact;
 import morethermalevaporation.client.gui.GuiMoreThermalEvaporationController;
 import morethermalevaporation.client.render.tileentity.RenderMoreThermalEvaporationPlant;
 import morethermalevaporation.common.registries.MoreThermalEvaporationContainerTypes;
@@ -21,7 +22,7 @@ public class ClientRegistration {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         for (MoreThermalEvaporationTier tier : MoreThermalEvaporationTier.values()) {
-            event.registerBlockEntityRenderer(MoreThermalEvaporationTileEntityTypes.getTileEntityTypeController(tier).get(), (context) -> new RenderMoreThermalEvaporationPlant(tier, context));
+            event.registerBlockEntityRenderer(MoreThermalEvaporationTileEntityTypes.CONTROLLERS.get(tier).get(), (context) -> new RenderMoreThermalEvaporationPlant(tier, context));
         }
     }
 
@@ -29,7 +30,8 @@ public class ClientRegistration {
     public static void registerContainers(RegisterEvent event) {
         event.register(Registries.MENU, helper -> {
             for (MoreThermalEvaporationTier tier : MoreThermalEvaporationTier.values()) {
-                ClientRegistrationUtil.registerScreen(MoreThermalEvaporationContainerTypes.getContainerType(tier), GuiMoreThermalEvaporationController::new);
+                ClientRegistrationUtil.registerScreen(MoreThermalEvaporationContainerTypes.MORE_THERMAL_EVAPORATION_CONTROLLER.get(tier), GuiMoreThermalEvaporationController::new);
+                ClientRegistrationUtil.registerScreen(MoreThermalEvaporationContainerTypes.MORE_THERMAL_EVAPORATION_COMPACT.get(tier), GuiMoreThermalEvaporationCompact::new);
             }
         });
     }
