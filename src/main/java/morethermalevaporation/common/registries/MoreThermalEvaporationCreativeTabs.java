@@ -18,12 +18,13 @@ public class MoreThermalEvaporationCreativeTabs {
     public static final RegistryObject<CreativeModeTab> TAB_MORE_THERMAL_EVAPORATION = CREATIVE_TABS.register("tab_more_thermal_evaporation", () ->
             CreativeModeTab.builder()
                     .title(Component.translatable("creativetab.morethermalevaporation.tab"))
-                    .icon(() -> new ItemStack(MoreThermalEvaporationBlocks.getBlock(MoreThermalEvaporationTier.BASIC).asItem()))
+                    .icon(() -> new ItemStack(MoreThermalEvaporationBlocks.BLOCKS.get(MoreThermalEvaporationTier.BASIC).asItem()))
                     .displayItems((parameters, output) -> {
                         for (MoreThermalEvaporationTier tier : MoreThermalEvaporationTier.values()) {
-                            output.accept(MoreThermalEvaporationBlocks.getBlock(tier));
-                            output.accept(MoreThermalEvaporationBlocks.getValve(tier));
-                            output.accept(MoreThermalEvaporationBlocks.getController(tier));
+                            output.accept(MoreThermalEvaporationBlocks.BLOCKS.get(tier));
+                            output.accept(MoreThermalEvaporationBlocks.VALVES.get(tier));
+                            output.accept(MoreThermalEvaporationBlocks.CONTROLLERS.get(tier));
+                            output.accept(MoreThermalEvaporationBlocks.COMPACTS.get(tier));
                         }
                     })
                     .build()

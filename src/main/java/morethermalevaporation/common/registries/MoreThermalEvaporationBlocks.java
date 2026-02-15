@@ -1,13 +1,16 @@
 package morethermalevaporation.common.registries;
 
 import mekanism.common.block.prefab.BlockBasicMultiblock;
+import mekanism.common.block.prefab.BlockTile.BlockTileModel;
 import mekanism.common.content.blocktype.BlockTypeTile;
 import mekanism.common.registration.impl.BlockDeferredRegister;
 import mekanism.common.registration.impl.BlockRegistryObject;
 import mekanism.common.tile.base.TileEntityMekanism;
 import morethermalevaporation.MoreThermalEvaporation;
 import morethermalevaporation.common.item.block.ItemBlockMoreThermalEvaporation;
+import morethermalevaporation.common.item.block.ItemBlockMoreThermalEvaporationCompact;
 import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
+import morethermalevaporation.common.tile.machine.TileEntityMoreThermalEvaporationCompact;
 import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationBlock;
 import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationController;
 import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationValve;
@@ -22,12 +25,15 @@ public class MoreThermalEvaporationBlocks {
     public static final EnumMap<MoreThermalEvaporationTier, BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationBlock>, ItemBlockMoreThermalEvaporation>> BLOCKS = new EnumMap<>(MoreThermalEvaporationTier.class);
     public static final EnumMap<MoreThermalEvaporationTier, BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationValve>, ItemBlockMoreThermalEvaporation>> VALVES = new EnumMap<>(MoreThermalEvaporationTier.class);
     public static final EnumMap<MoreThermalEvaporationTier, BlockRegistryObject<BlockBasicMultiblock<TileEntityMoreThermalEvaporationController>, ItemBlockMoreThermalEvaporation>> CONTROLLERS = new EnumMap<>(MoreThermalEvaporationTier.class);
+    public static final EnumMap<MoreThermalEvaporationTier, BlockRegistryObject<BlockTileModel<TileEntityMoreThermalEvaporationCompact, BlockTypeTile<TileEntityMoreThermalEvaporationCompact>>, ItemBlockMoreThermalEvaporationCompact>> COMPACTS = new EnumMap<>(MoreThermalEvaporationTier.class);
+
 
     static {
         for (MoreThermalEvaporationTier tier : MoreThermalEvaporationTier.values()) {
-            BLOCKS.put(tier, registerMoreThermalEvaporationPart(tier, "block", MoreThermalEvaporationBlockTypes.getBlockTypeBlock(tier)));
-            VALVES.put(tier, registerMoreThermalEvaporationPart(tier, "valve", MoreThermalEvaporationBlockTypes.getBlockTypeValve(tier)));
-            CONTROLLERS.put(tier, registerMoreThermalEvaporationPart(tier, "controller", MoreThermalEvaporationBlockTypes.getBlockTypeController(tier)));
+            BLOCKS.put(tier, registerMoreThermalEvaporationPart(tier, "block", MoreThermalEvaporationBlockTypes.BLOCKS.get(tier)));
+            VALVES.put(tier, registerMoreThermalEvaporationPart(tier, "valve", MoreThermalEvaporationBlockTypes.VALVES.get(tier)));
+            CONTROLLERS.put(tier, registerMoreThermalEvaporationPart(tier, "controller", MoreThermalEvaporationBlockTypes.CONTROLLERS.get(tier)));
+            COMPACTS.put(tier, registerMoreThermalEvaporationCompact(tier, MoreThermalEvaporationBlockTypes.COMPACTS.get(tier)));
         }
     }
 
@@ -42,15 +48,12 @@ public class MoreThermalEvaporationBlocks {
         return REGISTRY_BLOCKS.register(name, () -> new BlockBasicMultiblock<>(type, properties -> properties.mapColor(color)), ItemBlockMoreThermalEvaporation::new);
     }
 
-    public static BlockRegistryObject<? extends BlockBasicMultiblock<?>, ItemBlockMoreThermalEvaporation> getBlock(MoreThermalEvaporationTier tier) {
-        return BLOCKS.get(tier);
+    private static <TILE extends TileEntityMekanism> BlockRegistryObject<BlockTileModel<TILE, BlockTypeTile<TILE>>, ItemBlockMoreThermalEvaporationCompact> registerMoreThermalEvaporationCompact(MoreThermalEvaporationTier tier, BlockTypeTile<TILE> type) {
+
+        String name = tier.getBaseTier().getLowerName() + "_thermal_evaporation_compact";
+        MapColor color = tier.getBaseTier().getMapColor();
+
+        return REGISTRY_BLOCKS.register(name, () -> new BlockTileModel<>(type, properties -> properties.mapColor(color)), ItemBlockMoreThermalEvaporationCompact::new);
     }
 
-    public static BlockRegistryObject<? extends BlockBasicMultiblock<?>, ItemBlockMoreThermalEvaporation> getValve(MoreThermalEvaporationTier tier) {
-        return VALVES.get(tier);
-    }
-
-    public static BlockRegistryObject<? extends BlockBasicMultiblock<?>, ItemBlockMoreThermalEvaporation> getController(MoreThermalEvaporationTier tier) {
-        return CONTROLLERS.get(tier);
-    }
 }

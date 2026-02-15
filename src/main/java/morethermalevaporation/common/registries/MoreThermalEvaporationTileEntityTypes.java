@@ -5,6 +5,7 @@ import mekanism.common.registration.impl.TileEntityTypeRegistryObject;
 import mekanism.common.tile.base.TileEntityMekanism;
 import morethermalevaporation.MoreThermalEvaporation;
 import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
+import morethermalevaporation.common.tile.machine.TileEntityMoreThermalEvaporationCompact;
 import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationBlock;
 import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationController;
 import morethermalevaporation.common.tile.multiblock.TileEntityMoreThermalEvaporationValve;
@@ -14,9 +15,10 @@ import java.util.EnumMap;
 public class MoreThermalEvaporationTileEntityTypes {
     public static final TileEntityTypeDeferredRegister TILE_ENTITY_TYPES = new TileEntityTypeDeferredRegister(MoreThermalEvaporation.MODID);
 
-    private static final EnumMap<MoreThermalEvaporationTier, TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationBlock>> BLOCKS = new EnumMap<>(MoreThermalEvaporationTier.class);
-    private static final EnumMap<MoreThermalEvaporationTier, TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationValve>> VALVES = new EnumMap<>(MoreThermalEvaporationTier.class);
-    private static final EnumMap<MoreThermalEvaporationTier, TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationController>> CONTROLLERS = new EnumMap<>(MoreThermalEvaporationTier.class);
+    public static final EnumMap<MoreThermalEvaporationTier, TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationBlock>> BLOCKS = new EnumMap<>(MoreThermalEvaporationTier.class);
+    public static final EnumMap<MoreThermalEvaporationTier, TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationValve>> VALVES = new EnumMap<>(MoreThermalEvaporationTier.class);
+    public static final EnumMap<MoreThermalEvaporationTier, TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationController>> CONTROLLERS = new EnumMap<>(MoreThermalEvaporationTier.class);
+    public static final EnumMap<MoreThermalEvaporationTier, TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationCompact>> COMPACTS = new EnumMap<>(MoreThermalEvaporationTier.class);
 
     static {
         for (MoreThermalEvaporationTier tier : MoreThermalEvaporationTier.values()) {
@@ -40,22 +42,17 @@ public class MoreThermalEvaporationTileEntityTypes {
                     TileEntityMekanism::tickServer,
                     TileEntityMekanism::tickClient)
             );
+
+            COMPACTS.put(tier, TILE_ENTITY_TYPES.register(
+                    MoreThermalEvaporationBlocks.COMPACTS.get(tier),
+                    (pos, state) -> new TileEntityMoreThermalEvaporationCompact(tier, pos, state),
+                    TileEntityMekanism::tickServer,
+                    TileEntityMekanism::tickClient)
+            );
         }
     }
 
     private MoreThermalEvaporationTileEntityTypes() {
-    }
-
-    public static TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationBlock> getTileEntityTypeBlock(MoreThermalEvaporationTier tier) {
-        return BLOCKS.get(tier);
-    }
-
-    public static TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationValve> getTileEntityTypeValve(MoreThermalEvaporationTier tier) {
-        return VALVES.get(tier);
-    }
-
-    public static TileEntityTypeRegistryObject<TileEntityMoreThermalEvaporationController> getTileEntityTypeController(MoreThermalEvaporationTier tier) {
-        return CONTROLLERS.get(tier);
     }
 
 }
