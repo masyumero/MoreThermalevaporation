@@ -16,6 +16,7 @@ import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -47,7 +48,7 @@ public class MoreThermalEvaporation {
         MoreThermalEvaporationContainerTypes.CONTAINER_TYPES.register(modEventBus);
         MoreThermalEvaporationCreativeTabs.register(modEventBus);
         MoreThermalEvaporationConfig.registerConfig(ModLoadingContext.get());
-        MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST,this::registerCommands);
         modEventBus.addListener(MoreThermalEvaporation::onCommonSetup);
         MinecraftForge.EVENT_BUS.register(this);
     }
