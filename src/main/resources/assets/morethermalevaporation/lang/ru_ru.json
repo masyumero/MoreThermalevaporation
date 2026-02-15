@@ -19,6 +19,12 @@
   "block.morethermalevaporation.creative_thermal_evaporation_controller": "Творческий Контроллер теплового испарителя",
   "block.morethermalevaporation.creative_thermal_evaporation_valve": "Творческий Вентиль теплового испарителя",
 
+  "block.morethermalevaporation.basic_thermal_evaporation_compact": "Базовый компактный тепловой испаритель",
+  "block.morethermalevaporation.advanced_thermal_evaporation_compact": "Продвинутый компактный тепловой испаритель",
+  "block.morethermalevaporation.elite_thermal_evaporation_compact": "Элитный компактный тепловой испаритель",
+  "block.morethermalevaporation.ultimate_thermal_evaporation_compact": "Совершенный компактный тепловой испаритель",
+  "block.morethermalevaporation.creative_thermal_evaporation_compact": "Творческий компактный тепловой испаритель",
+
   "description.morethermalevaporation.basic_thermal_evaporation_block": "Обшивка из сплава меди, используется в Базовый тепловом испарителе благодаря теплопроводности меди.",
   "description.morethermalevaporation.basic_thermal_evaporation_controller": "Контроллер для Базовый теплового испарителя, в структуре может быть только один.",
   "description.morethermalevaporation.basic_thermal_evaporation_valve": "Вентиль для Базовый теплового испарителя, используется для ввода и вывода жидкости.",
@@ -39,11 +45,23 @@
   "description.morethermalevaporation.creative_thermal_evaporation_controller": "Контроллер для Творческий теплового испарителя, в структуре может быть только один.",
   "description.morethermalevaporation.creative_thermal_evaporation_valve": "Вентиль для Творческий теплового испарителя, используется для ввода и вывода жидкости.",
 
+  "description.morethermalevaporation.basic_thermal_evaporation_compact": "Передовое устройство, в котором все функции базовой установки теплового испарителя интегрированы в одном корпусе.",
+  "description.morethermalevaporation.advanced_thermal_evaporation_compact": "Передовое устройство, в котором все функции продвинутой установки теплового испарителя интегрированы в одном корпусе.",
+  "description.morethermalevaporation.elite_thermal_evaporation_compact": "Передовое устройство, в котором все функции элитной установки теплового испарителя интегрированы в одном корпусе.",
+  "description.morethermalevaporation.ultimate_thermal_evaporation_compact": "Передовое устройство, в котором все функции совершенной установки теплового испарителя интегрированы в одном корпусе.",
+  "description.morethermalevaporation.creative_thermal_evaporation_compact": "Передовое устройство, в котором все функции творческой установки теплового испарителя интегрированы в одном корпусе.",
+
   "evaporation.morethermalevaporation.basic_evaporation_plant" : "Базовый Установка теплового испарителя",
   "evaporation.morethermalevaporation.advanced_evaporation_plant" : "Продвинутый Установка теплового испарителя",
   "evaporation.morethermalevaporation.elite_evaporation_plant" : "Элитный Установка теплового испарителя",
   "evaporation.morethermalevaporation.ultimate_evaporation_plant" : "Совершенный Установка теплового испарителя",
   "evaporation.morethermalevaporation.creative_evaporation_plant" : "Творческий Установка теплового испарителя",
+
+  "evaporation.morethermalevaporation.basic_evaporation_compact" : "Базовый компактный тепловой испаритель",
+  "evaporation.morethermalevaporation.advanced_evaporation_compact" : "Продвинутый компактный тепловой испаритель",
+  "evaporation.morethermalevaporation.elite_evaporation_compact" : "Элитный компактный тепловой испаритель",
+  "evaporation.morethermalevaporation.ultimate_evaporation_compact" : "Совершенный компактный тепловой испаритель",
+  "evaporation.morethermalevaporation.creative_evaporation_compact" : "Творческий компактный тепловой испаритель",
 
   "mbtool.structure.morethermalevaporation_basic_evaporation_tower": "MTE Базовый Установка теплового испарителя",
   "mbtool.structure.morethermalevaporation_advanced_evaporation_tower": "MTE Продвинутый Установка теплового испарителя",
