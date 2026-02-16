@@ -4,6 +4,7 @@ import mekanism.client.ClientRegistrationUtil;
 import morethermalevaporation.MoreThermalEvaporation;
 import morethermalevaporation.client.gui.GuiMoreThermalEvaporationCompact;
 import morethermalevaporation.client.gui.GuiMoreThermalEvaporationController;
+import morethermalevaporation.client.render.tileentity.RenderMoreThermalEvaporationCompact;
 import morethermalevaporation.client.render.tileentity.RenderMoreThermalEvaporationPlant;
 import morethermalevaporation.common.registries.MoreThermalEvaporationContainerTypes;
 import morethermalevaporation.common.registries.MoreThermalEvaporationTileEntityTypes;
@@ -11,6 +12,7 @@ import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
 import net.minecraft.core.registries.Registries;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,6 +25,7 @@ public class ClientRegistration {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         for (MoreThermalEvaporationTier tier : MoreThermalEvaporationTier.values()) {
             event.registerBlockEntityRenderer(MoreThermalEvaporationTileEntityTypes.CONTROLLERS.get(tier).get(), (context) -> new RenderMoreThermalEvaporationPlant(tier, context));
+            event.registerBlockEntityRenderer(MoreThermalEvaporationTileEntityTypes.COMPACTS.get(tier).get(), (context) -> new RenderMoreThermalEvaporationCompact(tier, context));
         }
     }
 
@@ -34,5 +37,10 @@ public class ClientRegistration {
                 ClientRegistrationUtil.registerScreen(MoreThermalEvaporationContainerTypes.MORE_THERMAL_EVAPORATION_COMPACT.get(tier), GuiMoreThermalEvaporationCompact::new);
             }
         });
+    }
+
+    @SubscribeEvent
+    public static void onStitch(TextureStitchEvent.Post event) {
+        RenderMoreThermalEvaporationCompact.resetCachedModels();
     }
 }

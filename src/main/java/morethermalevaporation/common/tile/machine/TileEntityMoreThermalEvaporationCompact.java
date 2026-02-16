@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import mekanism.api.IContentsListener;
 import mekanism.api.IEvaporationSolar;
+import mekanism.api.NBTConstants;
 import mekanism.api.RelativeSide;
 import mekanism.api.heat.HeatAPI;
 import mekanism.api.recipes.FluidToFluidRecipe;
@@ -48,9 +49,12 @@ import mekanism.common.tile.component.config.slot.FluidSlotInfo;
 import mekanism.common.tile.component.config.slot.InventorySlotInfo;
 import mekanism.common.tile.prefab.TileEntityRecipeMachine;
 import mekanism.common.util.MekanismUtils;
+import mekanism.common.util.NBTUtils;
+import mekanism.common.util.WorldUtils;
 import morethermalevaporation.common.registries.MoreThermalEvaporationBlocks;
 import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.common.util.NonNullConsumer;
@@ -102,6 +106,8 @@ public class TileEntityMoreThermalEvaporationCompact extends TileEntityRecipeMac
     OutputInventorySlot outputOutputSlot;
     private double tempMultiplier;
     private int inputTankCapacity;
+    private boolean needsPacket;
+    private boolean updateClientLight = false;
 
     public TileEntityMoreThermalEvaporationCompact(MoreThermalEvaporationTier tier, BlockPos pos, BlockState state) {
         super(MoreThermalEvaporationBlocks.COMPACTS.get(tier), pos, state, TRACKED_ERROR_TYPES);
@@ -173,8 +179,32 @@ public class TileEntityMoreThermalEvaporationCompact extends TileEntityRecipeMac
     }
 
     @Override
+    protected void onUpdateClient() {
+        super.onUpdateClient();
+        if (updateClientLight) {
+            WorldUtils.recheckLighting(level, worldPosition);
+            updateClientLight = false;
+        }
+    }
+
+    @Override
     protected void onUpdateServer() {
         super.onUpdateServer();
+
+        // Render
+        float scale = MekanismUtils.getScale(prevScale, inputTank);
+        if (scale != prevScale) {
+            if (prevScale == 0 || scale == 0) {
+                WorldUtils.recheckLighting(level, worldPosition);
+            }
+            prevScale = scale;
+            needsPacket = true;
+        }
+        if (needsPacket) {
+            sendUpdatePacket();
+            needsPacket = false;
+        }
+
         lastEnvironmentLoss = simulateEnvironment();
         updateHeatCapacitors(null);
         tempMultiplier = (Math.min(maxMultiplierTemp, getTemperature()) - HeatAPI.AMBIENT_TEMP)
@@ -272,6 +302,29 @@ public class TileEntityMoreThermalEvaporationCompact extends TileEntityRecipeMac
     protected void presetVariables() {
         super.presetVariables();
         this.tier = Attribute.getTier(getBlockType(), MoreThermalEvaporationTier.class);
+    }
+
+    @NotNull
+    @Override
+    public CompoundTag getReducedUpdateTag() {
+        CompoundTag updateTag = super.getReducedUpdateTag();
+        updateTag.put(NBTConstants.FLUID_STORED, inputTank.getFluid().writeToNBT(new CompoundTag()));
+        updateTag.putFloat(NBTConstants.SCALE, prevScale);
+        return updateTag;
+    }
+
+    @Override
+    public void handleUpdateTag(@NotNull CompoundTag tag) {
+        super.handleUpdateTag(tag);
+        NBTUtils.setFluidStackIfPresent(tag, NBTConstants.FLUID_STORED, fluid -> inputTank.setStack(fluid));
+        NBTUtils.setFloatIfPresent(tag, NBTConstants.SCALE, scale -> {
+            if (prevScale != scale) {
+                if (prevScale == 0 || scale == 0) {
+                    updateClientLight = true;
+                }
+                prevScale = scale;
+            }
+        });
     }
 
     public MoreThermalEvaporationTier getTier() {
