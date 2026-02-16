@@ -53,7 +53,7 @@ public class MoreThermalEvaporationBlocks {
         String name = tier.getBaseTier().getLowerName() + "_thermal_evaporation_compact";
         MapColor color = tier.getBaseTier().getMapColor();
 
-        return REGISTRY_BLOCKS.register(name, () -> new BlockTileModel<>(type, properties -> properties.mapColor(color)), ItemBlockMoreThermalEvaporationCompact::new);
+        return REGISTRY_BLOCKS.register(name, () -> new BlockTileModel<>(type, properties -> properties.mapColor(color).noOcclusion()), ItemBlockMoreThermalEvaporationCompact::new);
     }
 
 }
