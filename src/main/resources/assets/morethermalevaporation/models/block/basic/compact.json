@@ -77,7 +77,7 @@
 				"north": {"uv": [14, 2, 16, 14], "texture": "#block"},
 				"east": {"uv": [0, 2, 2, 14], "texture": "#block"},
 				"south": {"uv": [0, 2, 2, 14], "texture": "#block"},
-				"west": {"uv": [14, 2, 16, 14], "texture": "#controller"},
+				"west": {"uv": [14, 2, 16, 14], "texture": "#block"},
 				"up": {"uv": [16, 14, 14, 16], "texture": "#block"},
 				"down": {"uv": [0, 0, 2, 2], "texture": "#block"}
 			}
@@ -97,9 +97,9 @@
 			}
 		},
 		{
-			"name": "glass_left",
+			"name": "glass_east",
 			"from": [15.5, 2, 2],
-			"to": [15.5, 14, 14],
+			"to": [15.75, 14, 14],
 			"rotation": {"angle": 0, "axis": "y", "origin": [1.25, 1, 15]},
 			"faces": {
 				"north": {"uv": [0, 16, 16, 0], "texture": "#glass"},
@@ -111,9 +111,9 @@
 			}
 		},
 		{
-			"name": "glass_right",
+			"name": "glass_west",
 			"from": [0.25, 2, 2],
-			"to": [0.25, 14, 14],
+			"to": [0.5, 14, 14],
 			"rotation": {"angle": 0, "axis": "y", "origin": [-14.25, 1, 15]},
 			"faces": {
 				"north": {"uv": [0, 16, 16, 0], "texture": "#glass"},
@@ -125,7 +125,7 @@
 			}
 		},
 		{
-			"name": "port_right",
+			"name": "port_west",
 			"from": [0, 4, 4],
 			"to": [1, 12, 12],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 6, 6]},
@@ -139,21 +139,16 @@
 			}
 		},
 		{
-			"name": "port_right_led",
+			"name": "port_west_led",
 			"from": [0, 4, 4],
 			"to": [0, 12, 12],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 7, 5]},
 			"faces": {
-				"north": {"uv": [0.25, 0, 0.25, 0.75], "texture": "#ports"},
-				"east": {"uv": [0.5, 0, 1.25, 0.75], "texture": "#ports"},
-				"south": {"uv": [0, 0, 0, 0.75], "texture": "#ports"},
-				"west": {"uv": [0, 0, 8, 8], "texture": "#ports_led"},
-				"up": {"uv": [0, 0.25, 0, 1], "texture": "#ports"},
-				"down": {"uv": [0, 0.5, 0, 1.25], "texture": "#ports"}
+				"west": {"uv": [0, 0, 8, 8], "texture": "#ports_led"}
 			}
 		},
 		{
-			"name": "port_left",
+			"name": "port_east",
 			"from": [15, 4, 4],
 			"to": [16, 12, 12],
 			"rotation": {"angle": 0, "axis": "y", "origin": [16, 7, 5]},
@@ -167,17 +162,12 @@
 			}
 		},
 		{
-			"name": "port_left_led",
+			"name": "port_east_led",
 			"from": [16, 4, 4],
 			"to": [16, 12, 12],
 			"rotation": {"angle": 0, "axis": "y", "origin": [16, 7, 5]},
 			"faces": {
-				"north": {"uv": [0.25, 0, 0.25, 0.75], "texture": "#ports"},
-				"east": {"uv": [8, 0, 0, 8], "texture": "#ports_led"},
-				"south": {"uv": [0, 0, 0, 0.75], "texture": "#ports"},
-				"west": {"uv": [1.25, 0, 0.5, 0.75], "texture": "#ports"},
-				"up": {"uv": [0, 0.25, 0, 1], "texture": "#ports"},
-				"down": {"uv": [0, 0.5, 0, 1.25], "texture": "#ports"}
+				"east": {"uv": [8, 0, 0, 8], "texture": "#ports_led"}
 			}
 		}
 	]
