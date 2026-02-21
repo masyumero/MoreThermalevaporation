@@ -1,9 +1,6 @@
 package morethermalevaporation.common.tile.machine;
 
-import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import mekanism.api.IContentsListener;
-import mekanism.api.IEvaporationSolar;
 import mekanism.api.NBTConstants;
 import mekanism.api.RelativeSide;
 import mekanism.api.heat.HeatAPI;
@@ -56,8 +53,6 @@ import morethermalevaporation.common.tier.MoreThermalEvaporationTier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.common.util.NonNullConsumer;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -72,11 +67,8 @@ public class TileEntityMoreThermalEvaporationCompact extends TileEntityRecipeMac
             RecipeError.NOT_ENOUGH_OUTPUT_SPACE,
             RecipeError.INPUT_DOESNT_PRODUCE_OUTPUT
     );
-    public static double maxMultiplierTemp;
     @ContainerSync
     private final boolean[] trackedErrors = new boolean[TRACKED_ERROR_TYPES.size()];
-    private final Int2ObjectMap<NonNullConsumer<LazyOptional<IEvaporationSolar>>> cachedSolarListeners = new Int2ObjectArrayMap<>(1);
-    private final Int2ObjectMap<LazyOptional<IEvaporationSolar>> cachedSolar = new Int2ObjectArrayMap<>(1);
     private final IOutputHandler<@NotNull FluidStack> outputHandler;
     private final IInputHandler<@NotNull FluidStack> inputHandler;
     private final double biomeAmbientTemp;
@@ -111,7 +103,6 @@ public class TileEntityMoreThermalEvaporationCompact extends TileEntityRecipeMac
 
     public TileEntityMoreThermalEvaporationCompact(MoreThermalEvaporationTier tier, BlockPos pos, BlockState state) {
         super(MoreThermalEvaporationBlocks.COMPACTS.get(tier), pos, state, TRACKED_ERROR_TYPES);
-        maxMultiplierTemp = this.tier.getMultiplierTemp();
         biomeAmbientTemp = HeatAPI.getAmbientTemp(this.getLevel(), this.getTilePos());
         heatCapacitor.setHeatCapacity(
                 MekanismConfig.general.evaporationHeatCapacity.get() * MAX_HEIGHT,
@@ -159,7 +150,7 @@ public class TileEntityMoreThermalEvaporationCompact extends TileEntityRecipeMac
 
     @NotNull
     @Override
-    protected @Nullable IHeatCapacitorHolder getInitialHeatCapacitors(IContentsListener listener, IContentsListener recipeCacheListener, CachedAmbientTemperature ambientTemperature) {
+    protected IHeatCapacitorHolder getInitialHeatCapacitors(IContentsListener listener, IContentsListener recipeCacheListener, CachedAmbientTemperature ambientTemperature) {
         HeatCapacitorHelper builder = HeatCapacitorHelper.forSide(this::getDirection);
         builder.addCapacitor(heatCapacitor = BasicHeatCapacitor.create(MekanismConfig.general.evaporationHeatCapacity.get() * 3, () -> biomeAmbientTemp, listener));
         return builder.build();
@@ -207,9 +198,8 @@ public class TileEntityMoreThermalEvaporationCompact extends TileEntityRecipeMac
 
         lastEnvironmentLoss = simulateEnvironment();
         updateHeatCapacitors(null);
-        tempMultiplier = (Math.min(maxMultiplierTemp, getTemperature()) - HeatAPI.AMBIENT_TEMP)
-                * MekanismConfig.general.evaporationTempMultiplier.get()
-                * ((double) 18 / MAX_HEIGHT); // TODO
+        tempMultiplier = (Math.min(this.tier.getMultiplierTemp(), getTemperature()) - HeatAPI.AMBIENT_TEMP)
+                * MekanismConfig.general.evaporationTempMultiplier.get();
         inputOutputSlot.drainTank(outputOutputSlot);
         inputInputSlot.fillTank(outputInputSlot);
         setActive(recipeCacheLookupMonitor.updateAndProcess());
@@ -219,7 +209,6 @@ public class TileEntityMoreThermalEvaporationCompact extends TileEntityRecipeMac
     public double simulateEnvironment() {
         double currentTemperature = getTemperature();
         double heatCapacity = heatCapacitor.getHeatCapacity();
-        heatCapacitor.handleHeat(0 * MekanismConfig.general.evaporationSolarMultiplier.get() * heatCapacity);
         if (Math.abs(currentTemperature - biomeAmbientTemp) < 0.001) {
             heatCapacitor.handleHeat(biomeAmbientTemp * heatCapacity - heatCapacitor.getHeat());
         } else {
@@ -241,7 +230,7 @@ public class TileEntityMoreThermalEvaporationCompact extends TileEntityRecipeMac
     }
 
     public int getMaxFluid() {
-        inputTankCapacity = (288 / 4) * MekanismConfig.general.evaporationFluidPerTank.get();
+        inputTankCapacity = (288 / 4) * this.tier.getInputTankCapacity();
         return inputTankCapacity;
     }
 
