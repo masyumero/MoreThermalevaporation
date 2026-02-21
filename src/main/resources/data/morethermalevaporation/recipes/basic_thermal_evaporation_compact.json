@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "tag": "forge:pellets/antimatter"
+    },
+    "B": {
+      "item": "morethermalevaporation:basic_thermal_evaporation_block"
+    },
+    "C": {
+      "item": "morethermalevaporation:basic_thermal_evaporation_controller"
+    },
+    "G": {
+      "item": "mekanism:structural_glass"
+    },
+    "V": {
+      "item": "morethermalevaporation:basic_thermal_evaporation_valve"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "VCV",
+    "BGB"
+  ],
+  "result": {
+    "item": "morethermalevaporation:basic_thermal_evaporation_compact",
+    "count": 1
+  }
+}
